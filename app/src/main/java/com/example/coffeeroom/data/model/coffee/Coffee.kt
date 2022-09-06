@@ -1,4 +1,4 @@
-package com.example.coffeeroom.data.model
+package com.example.coffeeroom.data.model.coffee
 
 import android.graphics.Bitmap
 import androidx.room.ColumnInfo
@@ -20,3 +20,4 @@ data class Coffee(
     @ColumnInfo(name = "roasting_degree") val roastingDegree: String,
     val comment: String
 )
+
