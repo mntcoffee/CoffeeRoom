@@ -4,6 +4,7 @@ import androidx.annotation.WorkerThread
 import com.example.coffeeroom.data.model.coffee.Coffee
 import com.example.coffeeroom.data.model.coffee.CoffeeDao
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Singleton
 
 class CoffeeRepository(private val coffeeDao: CoffeeDao) {
 
