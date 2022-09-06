@@ -12,12 +12,12 @@ data class Coffee(
     @ColumnInfo(name = "created_at") val createdAt: LocalDate,
     @ColumnInfo(name = "updated_at") val updatedAt: LocalDate,
     @ColumnInfo(name = "is_favorite") val isFavorite: Boolean,
-    val image: Bitmap,
-    val country: String,
-    val farm: String,
-    val process: String,
-    val roaster: String,
-    @ColumnInfo(name = "roasting_degree") val roastingDegree: String,
-    val comment: String
+    val image: Bitmap?,
+    val country: String?,
+    val farm: String?,
+    val process: String?,
+    val roaster: String?,
+    @ColumnInfo(name = "roasting_degree") val roastingDegree: String?,
+    val comment: String?
 )
 
