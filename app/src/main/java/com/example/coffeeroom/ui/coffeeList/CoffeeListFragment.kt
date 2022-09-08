@@ -33,7 +33,7 @@ class CoffeeListFragment : Fragment() {
 
         // sample data
         val coffee = Coffee(
-//            id = 2L,
+            id = 0L,
             createdAt = Date(),
             updatedAt = Date(),
             isFavorite = true,
@@ -49,7 +49,7 @@ class CoffeeListFragment : Fragment() {
         })
 
 //        coffeeListViewModel.deleteAll()
-//        coffeeListViewModel.add(coffee)
+        coffeeListViewModel.add(coffee)
 //        coffeeListViewModel.add(coffee)
 //        coffeeListViewModel.update(coffee)
 //        coffeeListViewModel.delete(coffee)

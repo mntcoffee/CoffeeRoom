@@ -9,7 +9,7 @@ import java.util.*
 
 @Entity(tableName = "coffee_table")
 data class Coffee(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0L,
+    @PrimaryKey(autoGenerate = true) val id: Long,
     @ColumnInfo(name = "created_at") val createdAt: Date,
     @ColumnInfo(name = "updated_at") val updatedAt: Date,
     @ColumnInfo(name = "is_favorite") val isFavorite: Boolean,
