@@ -9,11 +9,11 @@ import java.util.*
 
 @Entity(tableName = "coffee_table")
 data class Coffee(
-    @PrimaryKey val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0L,
     @ColumnInfo(name = "created_at") val createdAt: Date,
     @ColumnInfo(name = "updated_at") val updatedAt: Date,
     @ColumnInfo(name = "is_favorite") val isFavorite: Boolean,
-    val image: Bitmap?,
+//    val image: Bitmap?,
     val country: String?,
     val farm: String?,
     val process: String?,
