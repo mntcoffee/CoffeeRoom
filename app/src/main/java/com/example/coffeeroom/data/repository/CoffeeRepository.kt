@@ -3,10 +3,16 @@ package com.example.coffeeroom.data.repository
 import androidx.annotation.WorkerThread
 import com.example.coffeeroom.data.model.coffee.Coffee
 import com.example.coffeeroom.data.model.coffee.CoffeeDao
+import dagger.Provides
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
 import javax.inject.Singleton
 
-class CoffeeRepository(private val coffeeDao: CoffeeDao) {
+class CoffeeRepository @Inject constructor(
+    private val coffeeDao: CoffeeDao
+    ) {
 
     val allCoffee: Flow<List<Coffee>> = coffeeDao.getAllCoffee()
     val allCoffeeByCountry: Flow<List<Coffee>> = coffeeDao.getAllCoffeeByCountry()
@@ -19,11 +25,29 @@ class CoffeeRepository(private val coffeeDao: CoffeeDao) {
 
     @WorkerThread
     suspend fun insertCoffee(coffee: Coffee) {
-        coffeeDao.insertCoffee(coffee)
+        withContext(Dispatchers.IO) {
+            coffeeDao.insertCoffee(coffee)
+        }
+    }
+
+    @WorkerThread
+    suspend fun updateCoffee(coffee: Coffee) {
+        withContext(Dispatchers.IO) {
+            coffeeDao.updateCoffee(coffee)
+        }
     }
 
     @WorkerThread
     suspend fun deleteCoffee(coffee: Coffee) {
-        coffeeDao.deleteCoffee(coffee)
+        withContext(Dispatchers.IO) {
+            coffeeDao.deleteCoffee(coffee)
+        }
+    }
+
+    @WorkerThread
+    suspend fun deleteAll() {
+        withContext(Dispatchers.IO) {
+            coffeeDao.deleteAll()
+        }
     }
 }
