@@ -10,14 +10,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coffeeroom.MainApplication
 import com.example.coffeeroom.R
 import com.example.coffeeroom.data.model.coffee.Coffee
+import com.example.coffeeroom.databinding.FragmentCoffeeListBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
 class CoffeeListFragment : Fragment() {
+
+    private var _binding: FragmentCoffeeListBinding? = null
+    private val binding get() = _binding!!
 
     private val coffeeListViewModel: CoffeeListViewModel by viewModels()
 
@@ -25,11 +30,27 @@ class CoffeeListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_coffee_list, container, false)
+        _binding = FragmentCoffeeListBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // RecyclerView
+        val list = binding.recyclerviewCoffeeList
+        val adapter = CoffeeListAdapter()
+        // [TODO] not Implemented )
+//        adapter.setOnItemClickListener(
+//
+//            object : CoffeeListAdapter.OnItemClickListener {
+//                val action = 1
+//                val action = directions.action
+//                findNavController().navigate(action)
+//            }
+//        )
+        list.adapter = adapter
+        list.layoutManager = LinearLayoutManager(context)
 
         // sample data
         val coffee = Coffee(
@@ -45,8 +66,14 @@ class CoffeeListFragment : Fragment() {
             comment = "It is very delicious.")
 
         coffeeListViewModel.allCoffee.observe(viewLifecycleOwner, Observer { allCoffee ->
+            allCoffee.let { adapter.submitList(it) }
             Log.d("test", allCoffee.toString())
         })
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

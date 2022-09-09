@@ -1,5 +1,6 @@
 package com.example.coffeeroom.ui.coffeeList
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -10,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.coffeeroom.R
 import com.example.coffeeroom.data.model.coffee.Coffee
 
-class CoffeeListAdapter : ListAdapter<Coffee, CoffeeListAdapter.CoffeeListViewHolder>(
+class CoffeeListAdapter : ListAdapter<Coffee, CoffeeListViewHolder>(
     DIFF_CALLBACK
 ) {
 
@@ -34,16 +35,13 @@ class CoffeeListAdapter : ListAdapter<Coffee, CoffeeListAdapter.CoffeeListViewHo
             listener.onClick(coffee = getItem(position))
         }
     }
+}
 
-    class CoffeeListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView
-        val layout: CardView
-
-        init {
-            textView = view.findViewById(R.id.textview_coffee_item)
-            layout = view.findViewById(R.id.cardview_coffee)
-        }
-    }
+class CoffeeListViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
+    LayoutInflater.from(parent.context).inflate(R.layout.item_coffee, parent, false)
+) {
+    val textView: TextView = itemView.findViewById(R.id.textview_coffee_item)
+    val layout: CardView = itemView.findViewById(R.id.cardview_coffee)
 }
 
 private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Coffee>() {
