@@ -45,6 +45,10 @@ interface CoffeeDao {
     @Update
     suspend fun updateCoffee(coffee: Coffee)
 
+    // データベースからIDで1件取得
+    @Query("SELECT * FROM coffee_table WHERE id = :id")
+    fun getCoffee(id: Long): Coffee
+
     // データベースから1件削除
     @Delete
     suspend fun deleteCoffee(coffee: Coffee)
