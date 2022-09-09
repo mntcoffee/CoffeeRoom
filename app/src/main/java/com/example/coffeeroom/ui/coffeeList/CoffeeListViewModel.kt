@@ -19,7 +19,6 @@ class CoffeeListViewModel
     fun add(coffee: Coffee) {
         viewModelScope.launch {
             coffeeRepository.insertCoffee(coffee)
-            Log.d("test", "${coffee.toString()}")
         }
     }
 
