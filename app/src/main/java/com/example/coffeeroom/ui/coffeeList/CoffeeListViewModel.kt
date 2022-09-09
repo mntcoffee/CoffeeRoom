@@ -10,8 +10,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CoffeeListViewModel
-@Inject constructor
-    (
+@Inject constructor(
     private val coffeeRepository: CoffeeRepository
 ): ViewModel() {
 

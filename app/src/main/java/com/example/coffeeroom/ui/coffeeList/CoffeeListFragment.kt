@@ -48,10 +48,5 @@ class CoffeeListFragment : Fragment() {
             Log.d("test", allCoffee.toString())
         })
 
-//        coffeeListViewModel.deleteAll()
-        coffeeListViewModel.add(coffee)
-//        coffeeListViewModel.add(coffee)
-//        coffeeListViewModel.update(coffee)
-//        coffeeListViewModel.delete(coffee)
     }
 }
