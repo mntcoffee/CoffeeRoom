@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coffeeroom.MainApplication
 import com.example.coffeeroom.R
@@ -40,15 +41,18 @@ class CoffeeListFragment : Fragment() {
         // RecyclerView
         val list = binding.recyclerviewCoffeeList
         val adapter = CoffeeListAdapter()
-        // [TODO] not Implemented )
-//        adapter.setOnItemClickListener(
-//
-//            object : CoffeeListAdapter.OnItemClickListener {
-//                val action = 1
-//                val action = directions.action
-//                findNavController().navigate(action)
-//            }
-//        )
+        adapter.setOnItemClickListener(
+            object : CoffeeListAdapter.OnItemClickListener {
+                override fun onClick(coffee: Coffee) {
+                    Log.d("test", coffee.toString())
+                    val id: Long = coffee.id
+//                    val action = CoffeeListFragmentDirections.actionCoffeeListFragmentToCoffeeDetailFragment(id)
+                    val action = CoffeeListFragmentDirections
+                        .actionCoffeeListFragmentToCoffeeDetailFragment(id)
+                    findNavController().navigate(action)
+                }
+            }
+        )
         list.adapter = adapter
         list.layoutManager = LinearLayoutManager(context)
 
