@@ -62,9 +62,10 @@ class CoffeeListFragment : Fragment() {
             createdAt = Date(),
             updatedAt = Date(),
             isFavorite = true,
+            title = "Columbia ABC Farm Neon Tet Angels Natural",
             country = "Columbia",
             farm = "ABC Farm",
-            process = "Honey",
+            process = "Natural",
             roaster = "ABC roaster",
             roastingDegree = "medium",
             comment = "It is very delicious.")

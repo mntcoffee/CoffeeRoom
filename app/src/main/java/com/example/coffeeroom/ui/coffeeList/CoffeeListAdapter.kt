@@ -30,7 +30,7 @@ class CoffeeListAdapter : ListAdapter<Coffee, CoffeeListViewHolder>(
         CoffeeListViewHolder(parent)
 
     override fun onBindViewHolder(holder: CoffeeListViewHolder, position: Int) {
-        holder.textView.text = "${getItem(position).country} ${getItem(position).farm}"
+        holder.textView.text = "${getItem(position).title}"
         holder.layout.setOnClickListener {
             listener.onClick(coffee = getItem(position))
         }
