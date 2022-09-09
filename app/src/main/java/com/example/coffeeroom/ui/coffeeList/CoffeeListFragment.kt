@@ -69,10 +69,10 @@ class CoffeeListFragment : Fragment() {
             roastingDegree = "medium",
             comment = "It is very delicious.")
 
-        coffeeListViewModel.allCoffee.observe(viewLifecycleOwner, Observer { allCoffee ->
+        coffeeListViewModel.allCoffee.observe(viewLifecycleOwner) { allCoffee ->
             allCoffee.let { adapter.submitList(it) }
             Log.d("test", allCoffee.toString())
-        })
+        }
 
     }
 
