@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.coffeeroom.R
 import com.example.coffeeroom.databinding.FragmentCoffeeDetailBinding
@@ -15,7 +16,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class CoffeeDetailFragment : Fragment() {
 
     private var _binding: FragmentCoffeeDetailBinding? = null
-    val binding get() = _binding!!
+    private val binding get() = _binding!!
+
+    private val coffeeDetailViewModel: CoffeeDetailViewModel by viewModels()
 
     private val args: CoffeeDetailFragmentArgs by navArgs()
 
@@ -32,6 +35,11 @@ class CoffeeDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         Log.d("test", args.coffeeID.toString())
+        coffeeDetailViewModel.onStart(args.coffeeID)
+
+        coffeeDetailViewModel.coffeeDetail.observe(viewLifecycleOwner) { coffeeDetail ->
+            Log.d("test", "observe: ${coffeeDetail.toString()}")
+        }
     }
 
     override fun onDestroyView() {

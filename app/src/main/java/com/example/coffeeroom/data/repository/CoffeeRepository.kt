@@ -45,6 +45,13 @@ class CoffeeRepository @Inject constructor(
     }
 
     @WorkerThread
+    suspend fun getCoffee(id: Long): Coffee {
+        return withContext(Dispatchers.IO) {
+            coffeeDao.getCoffee(id)
+        }
+    }
+
+    @WorkerThread
     suspend fun deleteAll() {
         withContext(Dispatchers.IO) {
             coffeeDao.deleteAll()
