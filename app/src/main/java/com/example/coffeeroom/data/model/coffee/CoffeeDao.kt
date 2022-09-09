@@ -1,9 +1,6 @@
 package com.example.coffeeroom.data.model.coffee
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -44,7 +41,16 @@ interface CoffeeDao {
     @Insert
     suspend fun insertCoffee(coffee: Coffee)
 
+    // データベースを更新
+    @Update
+    suspend fun updateCoffee(coffee: Coffee)
+
     // データベースから1件削除
     @Delete
     suspend fun deleteCoffee(coffee: Coffee)
+
+    // データベースから全て削除
+    @Query("DELETE FROM coffee_table")
+    suspend fun deleteAll()
+
 }
