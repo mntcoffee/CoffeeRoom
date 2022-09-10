@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.coffeeDetail.CoffeeDetailAddFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/hello_blank_fragment" />
+
+</FrameLayout>
+
+
+<!--<ScrollView-->
+<!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--xmlns:tools="http://schemas.android.com/tools"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--android:fillViewport="true">-->
+
+<!--<androidx.constraintlayout.widget.ConstraintLayout-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".ui.coffeeDetail.CoffeeDetailEditFragment">-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/imageview_coffee"-->
+<!--        android:layout_width="@dimen/image_size_coffee_detail"-->
+<!--        android:layout_height="@dimen/image_size_coffee_detail"-->
+<!--        android:layout_marginTop="@dimen/image_margin"-->
+<!--        android:src="@drawable/ic_baseline_android_24"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/edittext_title"-->
+<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--        android:layout_width= "match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="@dimen/textview_margin"-->
+<!--        android:layout_marginTop="@dimen/textview_margin"-->
+<!--        android:layout_marginEnd="@dimen/textview_margin"-->
+<!--        app:layout_constraintEnd_toEndOf="@id/imageview_coffee"-->
+<!--        app:layout_constraintStart_toStartOf="@id/imageview_coffee"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/imageview_coffee">-->
+
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:hint="@string/coffee_detail_title"-->
+<!--            android:textSize="@dimen/text_size_detail_title"-->
+<!--            android:textStyle="bold"-->
+<!--            android:inputType="text"-->
+<!--            android:maxLines="1"/>-->
+
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/textview_country"-->
+<!--        android:layout_width="@dimen/coffee_detail_text_width"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="@dimen/textview_margin"-->
+<!--        android:text="@string/country"-->
+<!--        android:textSize="@dimen/text_size_detail"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintStart_toStartOf="@id/edittext_title"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/edittext_title" />-->
+
+<!--    <com.google.android.material.textfield.TextInputLayout-->
+<!--        android:id="@+id/edit_text_country"-->
+<!--        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="@dimen/textview_margin"-->
+<!--        android:layout_marginTop="@dimen/textview_margin"-->
+<!--        android:layout_marginEnd="@dimen/textview_margin"-->
+<!--        app:layout_constraintTop_toTopOf="@id/textview_country"-->
+<!--        app:layout_constraintStart_toEndOf="@id/textview_country"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/textview_country"-->
+<!--        app:layout_constraintEnd_toEndOf="@id/edittext_title">-->
+
+<!--        <com.google.android.material.textfield.TextInputEditText-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:hint="@string/coffee_detail_title"-->
+<!--            android:textSize="@dimen/text_size_detail"-->
+<!--            android:inputType="text"-->
+<!--            android:maxLines="1" />-->
+<!--    </com.google.android.material.textfield.TextInputLayout>-->
+
+
+<!--    &lt;!&ndash;            <com.google.android.material.textfield.TextInputLayout&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:id="@+id/edittext_country"&ndash;&gt;-->
+<!--    &lt;!&ndash;                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_width="0dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintBottom_toBottomOf="@id/textview_country"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintEnd_toEndOf="@id/edittext_title"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintStart_toEndOf="@id/textview_country"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintTop_toTopOf="@id/textview_country">&ndash;&gt;-->
+
+<!--    &lt;!&ndash;                <com.google.android.material.textfield.TextInputEditText&ndash;&gt;-->
+<!--    &lt;!&ndash;                    android:layout_width="0dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
+<!--    &lt;!&ndash;                    android:textSize="@dimen/text_size_detail"&ndash;&gt;-->
+<!--    &lt;!&ndash;                    android:inputType="text"&ndash;&gt;-->
+<!--    &lt;!&ndash;                    android:maxLines="1" />&ndash;&gt;-->
+
+<!--    &lt;!&ndash;            </com.google.android.material.textfield.TextInputLayout>&ndash;&gt;-->
+
+<!--    &lt;!&ndash;            <TextView&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:id="@+id/textview_farm"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_width="@dimen/coffee_detail_text_width"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_marginTop="@dimen/textview_margin"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:text="@string/farm"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:textSize="@dimen/text_size_detail"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:textStyle="bold"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintStart_toStartOf="@id/textview_country"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintTop_toBottomOf="@id/textview_country" />&ndash;&gt;-->
+
+<!--    &lt;!&ndash;            <com.google.android.material.textfield.TextInputEditText&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:id="@+id/edittext_farm"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_width="0dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:textSize="@dimen/text_size_detail"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintBottom_toBottomOf="@id/textview_farm"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintEnd_toEndOf="@id/edittext_title"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintStart_toEndOf="@id/textview_farm"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintTop_toTopOf="@id/textview_farm" />&ndash;&gt;-->
+
+<!--    &lt;!&ndash;            <TextView&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:id="@+id/textview_process"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_width="@dimen/coffee_detail_text_width"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_marginTop="@dimen/textview_margin"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:text="@string/process"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:textSize="@dimen/text_size_detail"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:textStyle="bold"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintStart_toStartOf="@id/textview_farm"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintTop_toBottomOf="@id/textview_farm" />&ndash;&gt;-->
+
+<!--    &lt;!&ndash;            <com.google.android.material.textfield.TextInputEditText&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:id="@+id/edittext_process"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_width="0dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:textSize="@dimen/text_size_detail"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintBottom_toBottomOf="@id/textview_process"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintEnd_toEndOf="@id/edittext_title"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintStart_toEndOf="@id/textview_process"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintTop_toTopOf="@id/textview_process" />&ndash;&gt;-->
+
+<!--    &lt;!&ndash;            <TextView&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:id="@+id/textview_roaster"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_width="@dimen/coffee_detail_text_width"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_marginTop="@dimen/textview_margin"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:text="@string/roaster"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:textSize="@dimen/text_size_detail"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:textStyle="bold"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintStart_toStartOf="@id/textview_process"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintTop_toBottomOf="@id/textview_process" />&ndash;&gt;-->
+
+<!--    &lt;!&ndash;            <com.google.android.material.textfield.TextInputEditText&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:id="@+id/edittext_roaster"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_width="0dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:textSize="@dimen/text_size_detail"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintBottom_toBottomOf="@id/textview_roaster"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintEnd_toEndOf="@id/edittext_title"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintStart_toEndOf="@id/textview_roaster"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintTop_toTopOf="@id/textview_roaster" />&ndash;&gt;-->
+
+<!--    &lt;!&ndash;            <TextView&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:id="@+id/textview_roasting_degree"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_width="@dimen/coffee_detail_text_width"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_marginTop="@dimen/textview_margin"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:text="Roasting Degree"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:textSize="@dimen/text_size_detail"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:textStyle="bold"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintStart_toStartOf="@id/textview_roaster"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintTop_toBottomOf="@id/textview_roaster" />&ndash;&gt;-->
+
+<!--    &lt;!&ndash;            <com.google.android.material.textfield.TextInputEditText&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:id="@+id/edittext_roasting_degree"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_width="0dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:textSize="@dimen/text_size_detail"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintBottom_toBottomOf="@id/textview_roasting_degree"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintEnd_toEndOf="@id/edittext_title"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintStart_toEndOf="@id/textview_roasting_degree"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintTop_toTopOf="@id/textview_roasting_degree" />&ndash;&gt;-->
+
+<!--    &lt;!&ndash;            <com.google.android.material.textfield.TextInputEditText&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:id="@+id/edittext_comment"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_width="0dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_height="0dp"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:layout_marginTop="@dimen/textview_margin"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:hint="@string/hint_input_comment"&ndash;&gt;-->
+<!--    &lt;!&ndash;                android:textSize="@dimen/text_size_detail"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintBottom_toTopOf="@id/button_save"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintEnd_toEndOf="@id/edittext_title"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintStart_toStartOf="@id/textview_roasting_degree"&ndash;&gt;-->
+<!--    &lt;!&ndash;                app:layout_constraintTop_toBottomOf="@id/textview_roasting_degree" />&ndash;&gt;-->
+
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:id="@+id/button_delete"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="@dimen/button_margin"-->
+<!--        android:layout_marginStart="16dp"-->
+<!--        android:text="@string/delete"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent" />-->
+
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:id="@+id/button_save"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="@dimen/button_margin"-->
+<!--        android:text="@string/save"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
+
+
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--</ScrollView>-->
