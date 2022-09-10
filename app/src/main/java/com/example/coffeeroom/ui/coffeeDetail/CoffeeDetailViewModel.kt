@@ -23,4 +23,16 @@ class CoffeeDetailViewModel
             _coffeeDetail.value = coffeeRepository.getCoffee(id)
         }
     }
+
+    fun update(coffee: Coffee) {
+        viewModelScope.launch {
+            coffeeRepository.updateCoffee(coffee)
+        }
+    }
+
+    fun add(coffee: Coffee) {
+        viewModelScope.launch {
+            coffeeRepository.insertCoffee(coffee)
+        }
+    }
 }
