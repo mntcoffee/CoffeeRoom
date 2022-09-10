@@ -3,4 +3,14 @@
     <string name="sample_coffee">Brazil Fazenda Passeio</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hint_input_title">タイトルを入力してください</string>
+    <string name="farm">Farm</string>
+    <string name="country">Country</string>
+    <string name="process">Process</string>
+    <string name="roaster">Roaster</string>
+    <string name="hint_input_comment">コメントを入力してください</string>
+    <string name="delete">DELETE</string>
+    <string name="save">SAVE</string>
+    <string name="hint_input_country">産地国を入力してください</string>
+    <string name="hint_input_farm">農園を入力してください</string>
 </resources>

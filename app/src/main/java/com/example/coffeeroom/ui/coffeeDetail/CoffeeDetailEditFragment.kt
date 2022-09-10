@@ -8,26 +8,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.example.coffeeroom.R
-import com.example.coffeeroom.databinding.FragmentCoffeeDetailBinding
+import com.example.coffeeroom.databinding.FragmentCoffeeDetailEditBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CoffeeDetailFragment : Fragment() {
+class CoffeeDetailEditFragment : Fragment() {
 
-    private var _binding: FragmentCoffeeDetailBinding? = null
+    private var _binding: FragmentCoffeeDetailEditBinding? = null
     private val binding get() = _binding!!
 
     private val coffeeDetailViewModel: CoffeeDetailViewModel by viewModels()
 
-    private val args: CoffeeDetailFragmentArgs by navArgs()
+    private val args: CoffeeDetailEditFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentCoffeeDetailBinding.inflate(inflater, container, false)
+        _binding = FragmentCoffeeDetailEditBinding.inflate(inflater, container, false)
         return binding.root
     }
 

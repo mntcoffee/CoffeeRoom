@@ -6,4 +6,10 @@
     <dimen name="size_coffee_item_image">48dp</dimen>
     <dimen name="textview_margin">16dp</dimen>
     <dimen name="textview_size_coffee_item">20sp</dimen>
+    <dimen name="image_size_coffee_detail">200dp</dimen>
+    <dimen name="image_margin">16dp</dimen>
+    <dimen name="text_size_detail_title">24dp</dimen>
+    <dimen name="text_size_detail">16sp</dimen>
+    <dimen name="coffee_detail_text_width">100dp</dimen>
+    <dimen name="button_margin">16dp</dimen>
 </resources>

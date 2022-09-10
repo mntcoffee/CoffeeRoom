@@ -46,9 +46,8 @@ class CoffeeListFragment : Fragment() {
                 override fun onClick(coffee: Coffee) {
                     Log.d("test", coffee.toString())
                     val id: Long = coffee.id
-//                    val action = CoffeeListFragmentDirections.actionCoffeeListFragmentToCoffeeDetailFragment(id)
                     val action = CoffeeListFragmentDirections
-                        .actionCoffeeListFragmentToCoffeeDetailFragment(id)
+                        .actionCoffeeListFragmentToCoffeeDetailEditFragment(id)
                     findNavController().navigate(action)
                 }
             }

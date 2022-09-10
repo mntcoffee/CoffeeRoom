@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_add_white_24.xml" value="0.155" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
         <entry key="app/src/main/res/layout/fragment_coffee_detail.xml" value="0.175" />
+        <entry key="app/src/main/res/layout/fragment_coffee_detail_add.xml" value="0.14907407407407408" />
         <entry key="app/src/main/res/layout/fragment_coffee_list.xml" value="0.16666666666666666" />
         <entry key="app/src/main/res/layout/item_coffee.xml" value="0.1453125" />
       </map>
