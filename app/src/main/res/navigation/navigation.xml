@@ -34,5 +34,8 @@
         <argument
             android:name="coffeeID"
             app:argType="long" />
+        <action
+            android:id="@+id/action_coffeeDetailFragment_to_coffeeDetailEditFragment"
+            app:destination="@id/coffeeDetailEditFragment" />
     </fragment>
 </navigation>
