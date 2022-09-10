@@ -47,7 +47,7 @@ class CoffeeListFragment : Fragment() {
                     Log.d("test", coffee.toString())
                     val id: Long = coffee.id
                     val action = CoffeeListFragmentDirections
-                        .actionCoffeeListFragmentToCoffeeDetailEditFragment(id)
+                        .actionCoffeeListFragmentToCoffeeDetailFragment(id)
                     findNavController().navigate(action)
                 }
             }
@@ -72,6 +72,12 @@ class CoffeeListFragment : Fragment() {
         coffeeListViewModel.allCoffee.observe(viewLifecycleOwner) { allCoffee ->
             allCoffee.let { adapter.submitList(it) }
             Log.d("test", allCoffee.toString())
+        }
+
+        binding.fabAddCoffee.setOnClickListener {
+            val action = CoffeeListFragmentDirections
+                .actionCoffeeListFragmentToCoffeeDetailEditFragment(0L)
+            findNavController().navigate(action)
         }
 
     }

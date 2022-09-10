@@ -13,12 +13,24 @@
         <action
             android:id="@+id/action_coffeeListFragment_to_coffeeDetailEditFragment"
             app:destination="@id/coffeeDetailEditFragment" />
+        <action
+            android:id="@+id/action_coffeeListFragment_to_coffeeDetailFragment"
+            app:destination="@id/coffeeDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/coffeeDetailEditFragment"
         android:name="com.example.coffeeroom.ui.coffeeDetail.CoffeeDetailEditFragment"
         android:label="fragment_coffee_detail"
         tools:layout="@layout/fragment_coffee_detail_edit">
+        <argument
+            android:name="coffeeID"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/coffeeDetailFragment"
+        android:name="com.example.coffeeroom.ui.coffeeDetail.CoffeeDetailFragment"
+        android:label="fragment_coffee_detail"
+        tools:layout="@layout/fragment_coffee_detail">
         <argument
             android:name="coffeeID"
             app:argType="long" />
