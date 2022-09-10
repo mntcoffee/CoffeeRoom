@@ -23,4 +23,5 @@
     <string name="sample_process">Natural</string>
     <string name="sample_roaster">ABC Coffee Roaster</string>
     <string name="sample_roasting_degree">City Roast</string>
+    <string name="search">検索</string>
 </resources>
