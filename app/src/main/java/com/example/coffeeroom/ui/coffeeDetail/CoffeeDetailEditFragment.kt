@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.coffeeroom.data.model.coffee.Coffee
 import com.example.coffeeroom.databinding.FragmentCoffeeDetailEditBinding
@@ -75,9 +76,11 @@ class CoffeeDetailEditFragment : Fragment() {
             if(coffeeID == 0L) {
                 Log.d("test", "add: ${coffee.toString()}")
                 coffeeDetailViewModel.add(coffee)
+                findNavController().popBackStack()
             } else {
                 Log.d("test", "edit: ${coffee.toString()}")
                 coffeeDetailViewModel.update(coffee)
+                findNavController().popBackStack()
             }
         }
     }
