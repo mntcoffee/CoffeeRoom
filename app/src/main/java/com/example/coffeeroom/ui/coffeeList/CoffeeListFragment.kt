@@ -3,6 +3,8 @@ package com.example.coffeeroom.ui.coffeeList
 import android.graphics.Bitmap
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -20,7 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
-class CoffeeListFragment : Fragment() {
+class CoffeeListFragment : Fragment(), TextWatcher {
 
     private var _binding: FragmentCoffeeListBinding? = null
     private val binding get() = _binding!!
@@ -55,6 +57,8 @@ class CoffeeListFragment : Fragment() {
         list.adapter = adapter
         list.layoutManager = LinearLayoutManager(context)
 
+        binding.searchInputText.addTextChangedListener(this)
+
         // sample data
         val coffee = Coffee(
             id = 0L,
@@ -74,6 +78,10 @@ class CoffeeListFragment : Fragment() {
             Log.d("test", allCoffee.toString())
         }
 
+        coffeeListViewModel.filteredCoffeeList.observe(viewLifecycleOwner) { filteredCoffee ->
+            adapter.submitList(filteredCoffee)
+        }
+
         binding.fabAddCoffee.setOnClickListener {
             val action = CoffeeListFragmentDirections
                 .actionCoffeeListFragmentToCoffeeDetailEditFragment(0L)
@@ -85,5 +93,18 @@ class CoffeeListFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+    }
+
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+    }
+
+    override fun afterTextChanged(p0: Editable?) {
+        Log.d("search", p0.toString())
+        coffeeListViewModel.filteringCoffeeList(p0.toString())
     }
 }
