@@ -14,6 +14,7 @@ data class Coffee(
     @ColumnInfo(name = "updated_at") val updatedAt: Date,
     @ColumnInfo(name = "is_favorite") val isFavorite: Boolean,
 //    val image: Bitmap?,
+    val title: String?,
     val country: String?,
     val farm: String?,
     val process: String?,

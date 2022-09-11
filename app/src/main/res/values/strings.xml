@@ -3,4 +3,25 @@
     <string name="sample_coffee">Brazil Fazenda Passeio</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hint_input_title">タイトルを入力してください</string>
+    <string name="farm">Farm</string>
+    <string name="country">Country</string>
+    <string name="process">Process</string>
+    <string name="roaster">Roaster</string>
+    <string name="hint_input_comment">コメントを入力してください</string>
+    <string name="delete">DELETE</string>
+    <string name="save">SAVE</string>
+    <string name="hint_input_country">産地国を入力してください</string>
+    <string name="hint_input_farm">農園を入力してください</string>
+    <string name="edit">EDIT</string>
+    <string name="sample_date">最終更新日：2022/09/10 17:04</string>
+    <string name="sample_title">ABC スペシャルブレンド</string>
+    <string name="roasting_degree">Roasting Degree</string>
+    <string name="sample_comment">It is delicious</string>
+    <string name="sample_country">Brazil</string>
+    <string name="sample_farm">ABC Farm DEF Regions G1</string>
+    <string name="sample_process">Natural</string>
+    <string name="sample_roaster">ABC Coffee Roaster</string>
+    <string name="sample_roasting_degree">City Roast</string>
+    <string name="search">検索</string>
 </resources>

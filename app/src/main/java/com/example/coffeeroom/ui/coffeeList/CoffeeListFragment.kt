@@ -3,9 +3,12 @@ package com.example.coffeeroom.ui.coffeeList
 import android.graphics.Bitmap
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
@@ -46,7 +49,6 @@ class CoffeeListFragment : Fragment() {
                 override fun onClick(coffee: Coffee) {
                     Log.d("test", coffee.toString())
                     val id: Long = coffee.id
-//                    val action = CoffeeListFragmentDirections.actionCoffeeListFragmentToCoffeeDetailFragment(id)
                     val action = CoffeeListFragmentDirections
                         .actionCoffeeListFragmentToCoffeeDetailFragment(id)
                     findNavController().navigate(action)
@@ -62,18 +64,44 @@ class CoffeeListFragment : Fragment() {
             createdAt = Date(),
             updatedAt = Date(),
             isFavorite = true,
+            title = "Columbia ABC Farm Neon Tet Angels Natural",
             country = "Columbia",
             farm = "ABC Farm",
-            process = "Honey",
+            process = "Natural",
             roaster = "ABC roaster",
             roastingDegree = "medium",
-            comment = "It is very delicious.")
+            comment = "It is very delicious."
+        )
 
         coffeeListViewModel.allCoffee.observe(viewLifecycleOwner) { allCoffee ->
             allCoffee.let { adapter.submitList(it) }
             Log.d("test", allCoffee.toString())
         }
 
+        coffeeListViewModel.filteredCoffeeList.observe(viewLifecycleOwner) { filteredCoffee ->
+            adapter.submitList(filteredCoffee)
+        }
+
+        // 新規追加ボタン
+        binding.fabAddCoffee.setOnClickListener {
+            val action = CoffeeListFragmentDirections
+                .actionCoffeeListFragmentToCoffeeDetailEditFragment(0L)
+            findNavController().navigate(action)
+        }
+
+        // 検索ボタンを押したら検索画面(SearchResultFragment)に遷移する
+        binding.toolbarCoffeeList.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.search -> {
+                    Log.d("search", "search")
+                    val action = CoffeeListFragmentDirections
+                        .actionCoffeeListFragmentToSearchResultFragment()
+                    findNavController().navigate(action)
+                }
+
+            }
+            true
+        }
     }
 
     override fun onDestroyView() {

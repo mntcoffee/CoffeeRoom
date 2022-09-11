@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.coffeeDetail.CoffeeDetailEditFragment">
+
+        <ImageView
+            android:id="@+id/imageview_coffee"
+            android:layout_width="@dimen/image_size_coffee_detail"
+            android:layout_height="@dimen/image_size_coffee_detail"
+            android:layout_marginTop="@dimen/image_margin"
+            android:src="@drawable/ic_baseline_android_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edittext_title"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width= "match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/textview_margin"
+            android:layout_marginTop="@dimen/textview_margin"
+            android:layout_marginEnd="@dimen/textview_margin"
+            app:layout_constraintEnd_toEndOf="@id/imageview_coffee"
+            app:layout_constraintStart_toStartOf="@id/imageview_coffee"
+            app:layout_constraintTop_toBottomOf="@id/imageview_coffee">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_input_title"
+                android:textSize="@dimen/text_size_detail_title"
+                android:textStyle="bold"
+                android:inputType="text"
+                android:maxLines="1"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edittext_country"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width= "match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/textview_margin"
+            android:layout_marginTop="@dimen/textview_margin"
+            android:layout_marginEnd="@dimen/textview_margin"
+            app:layout_constraintEnd_toEndOf="@id/edittext_title"
+            app:layout_constraintStart_toStartOf="@id/edittext_title"
+            app:layout_constraintTop_toBottomOf="@id/edittext_title">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_input_country"
+                android:textSize="@dimen/text_size_detail"
+                android:inputType="text"
+                android:maxLines="1"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edittext_farm"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width= "match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/textview_margin"
+            android:layout_marginTop="@dimen/textview_margin"
+            android:layout_marginEnd="@dimen/textview_margin"
+            app:layout_constraintEnd_toEndOf="@id/edittext_country"
+            app:layout_constraintStart_toStartOf="@id/edittext_country"
+            app:layout_constraintTop_toBottomOf="@id/edittext_country">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_input_farm"
+                android:textSize="@dimen/text_size_detail"
+                android:inputType="text"
+                android:maxLines="1"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edittext_process"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width= "match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/textview_margin"
+            android:layout_marginTop="@dimen/textview_margin"
+            android:layout_marginEnd="@dimen/textview_margin"
+            app:layout_constraintEnd_toEndOf="@id/edittext_title"
+            app:layout_constraintStart_toStartOf="@id/edittext_farm"
+            app:layout_constraintTop_toBottomOf="@id/edittext_farm">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="精製プロセスを入力してください"
+                android:textSize="@dimen/text_size_detail"
+                android:inputType="text"
+                android:maxLines="1"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edittext_roaster"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width= "match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/textview_margin"
+            android:layout_marginTop="@dimen/textview_margin"
+            android:layout_marginEnd="@dimen/textview_margin"
+            app:layout_constraintEnd_toEndOf="@id/edittext_process"
+            app:layout_constraintStart_toStartOf="@id/edittext_process"
+            app:layout_constraintTop_toBottomOf="@id/edittext_process">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="ロースターを入力してください"
+                android:textSize="@dimen/text_size_detail"
+                android:inputType="text"
+                android:maxLines="1"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edittext_roasting_degree"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width= "match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/textview_margin"
+            android:layout_marginTop="@dimen/textview_margin"
+            android:layout_marginEnd="@dimen/textview_margin"
+            app:layout_constraintEnd_toEndOf="@id/edittext_roaster"
+            app:layout_constraintStart_toStartOf="@id/edittext_roaster"
+            app:layout_constraintTop_toBottomOf="@id/edittext_roaster">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="焙煎度を入力してください"
+                android:textSize="@dimen/text_size_detail"
+                android:inputType="text"
+                android:maxLines="1"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edittext_comment"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width= "match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/textview_margin"
+            android:layout_marginTop="@dimen/textview_margin"
+            android:layout_marginEnd="@dimen/textview_margin"
+            app:layout_constraintEnd_toEndOf="@id/edittext_roasting_degree"
+            app:layout_constraintStart_toStartOf="@id/edittext_roasting_degree"
+            app:layout_constraintTop_toBottomOf="@id/edittext_roasting_degree">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_input_comment"
+                android:textSize="@dimen/text_size_detail"
+                android:inputType="text"
+                android:maxLines="3"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/button_margin"
+            android:text="@string/save"
+            app:layout_constraintTop_toBottomOf="@id/edittext_comment"
+            app:layout_constraintStart_toStartOf="@id/edittext_comment"
+            app:layout_constraintEnd_toEndOf="@id/edittext_comment"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
+

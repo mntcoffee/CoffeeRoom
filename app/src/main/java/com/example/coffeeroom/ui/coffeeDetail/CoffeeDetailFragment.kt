@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.coffeeroom.R
 import com.example.coffeeroom.databinding.FragmentCoffeeDetailBinding
+import com.example.coffeeroom.databinding.FragmentCoffeeDetailEditBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,11 +36,28 @@ class CoffeeDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.d("test", args.coffeeID.toString())
-        coffeeDetailViewModel.onStart(args.coffeeID)
+        // coffee ID
+        val coffeeID = args.coffeeID
+        coffeeDetailViewModel.onStart(coffeeID)
 
+        // set text from coffee[coffeeID]
         coffeeDetailViewModel.coffeeDetail.observe(viewLifecycleOwner) { coffeeDetail ->
-            Log.d("test", "observe: ${coffeeDetail.toString()}")
+            binding.apply {
+                textviewTitle.text = coffeeDetail.title
+                textviewCountryData.text = coffeeDetail.country
+                textviewFarmData.text = coffeeDetail.farm
+                textviewProcessData.text = coffeeDetail.process
+                textviewRoasterData.text = coffeeDetail.roaster
+                textviewRoastingDegreeData.text = coffeeDetail.roastingDegree
+                textviewComment.text = coffeeDetail.comment
+            }
+        }
+
+        // edit button
+        binding.buttonEdit.setOnClickListener {
+            val action = CoffeeDetailFragmentDirections
+                .actionCoffeeDetailFragmentToCoffeeDetailEditFragment(coffeeID)
+            findNavController().navigate(action)
         }
     }
 
@@ -46,5 +65,4 @@ class CoffeeDetailFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
 }
