@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_coffeeListFragment_to_coffeeDetailFragment"
             app:destination="@id/coffeeDetailFragment" />
+        <action
+            android:id="@+id/action_coffeeListFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
     </fragment>
     <fragment
         android:id="@+id/coffeeDetailEditFragment"
@@ -38,4 +41,9 @@
             android:id="@+id/action_coffeeDetailFragment_to_coffeeDetailEditFragment"
             app:destination="@id/coffeeDetailEditFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.example.coffeeroom.ui.coffeeList.SearchResultFragment"
+        android:label="fragment_search_result"
+        tools:layout="@layout/fragment_search_result" />
 </navigation>

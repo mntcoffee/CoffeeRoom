@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
@@ -71,7 +72,8 @@ class CoffeeListFragment : Fragment(), TextWatcher {
             process = "Natural",
             roaster = "ABC roaster",
             roastingDegree = "medium",
-            comment = "It is very delicious.")
+            comment = "It is very delicious."
+        )
 
         coffeeListViewModel.allCoffee.observe(viewLifecycleOwner) { allCoffee ->
             allCoffee.let { adapter.submitList(it) }
@@ -88,6 +90,18 @@ class CoffeeListFragment : Fragment(), TextWatcher {
             findNavController().navigate(action)
         }
 
+        binding.toolbarCoffeeList.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.search -> {
+                    Log.d("search", "search")
+                    val action = CoffeeListFragmentDirections
+                        .actionCoffeeListFragmentToSearchResultFragment()
+                    findNavController().navigate(action)
+                }
+
+            }
+            true
+        }
     }
 
     override fun onDestroyView() {
