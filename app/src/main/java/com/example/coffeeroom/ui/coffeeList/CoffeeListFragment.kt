@@ -23,7 +23,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
-class CoffeeListFragment : Fragment(), TextWatcher {
+class CoffeeListFragment : Fragment() {
 
     private var _binding: FragmentCoffeeListBinding? = null
     private val binding get() = _binding!!
@@ -58,8 +58,6 @@ class CoffeeListFragment : Fragment(), TextWatcher {
         list.adapter = adapter
         list.layoutManager = LinearLayoutManager(context)
 
-        binding.searchInputText.addTextChangedListener(this)
-
         // sample data
         val coffee = Coffee(
             id = 0L,
@@ -84,12 +82,14 @@ class CoffeeListFragment : Fragment(), TextWatcher {
             adapter.submitList(filteredCoffee)
         }
 
+        // 新規追加ボタン
         binding.fabAddCoffee.setOnClickListener {
             val action = CoffeeListFragmentDirections
                 .actionCoffeeListFragmentToCoffeeDetailEditFragment(0L)
             findNavController().navigate(action)
         }
 
+        // 検索ボタンを押したら検索画面(SearchResultFragment)に遷移する
         binding.toolbarCoffeeList.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.search -> {
@@ -107,18 +107,5 @@ class CoffeeListFragment : Fragment(), TextWatcher {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-    }
-
-    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-    }
-
-    override fun afterTextChanged(p0: Editable?) {
-        Log.d("search", p0.toString())
-        coffeeListViewModel.filteringCoffeeList(p0.toString())
     }
 }

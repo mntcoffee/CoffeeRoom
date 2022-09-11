@@ -20,53 +20,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:menu="@menu/options_menu" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/search_bar"
-        android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_margin="@dimen/margin_min"
-        app:cardCornerRadius="@dimen/corner_radius"
-        app:cardElevation="@dimen/elevation"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_coffee_list"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/searchInputLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:importantForAutofill="no"
-            app:endIconMode="clear_text"
-            app:endIconTint="@android:color/darker_gray"
-            app:hintTextColor="@android:color/darker_gray"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:startIconDrawable="@android:drawable/ic_menu_search"
-            app:startIconTint="@android:color/darker_gray">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/search_input_text"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:hint="@string/search"
-                android:imeOptions="actionSearch"
-                android:inputType="text"
-                android:textSize="@dimen/text_size_min" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_coffee_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_bar"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_coffee_list"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/item_coffee"/>
