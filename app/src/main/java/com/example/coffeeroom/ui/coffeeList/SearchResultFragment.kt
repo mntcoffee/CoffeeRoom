@@ -33,16 +33,21 @@ class SearchResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // 画面生成時にキーボードを表示
         showSoftKeyboard(binding.edittextSearch)
+
+        // RecyclerViewにfocusが当たったときにキーボードを隠す
         binding.recyclerViewSearchResult.setOnFocusChangeListener { _, HasFocus ->
             if(HasFocus) showOffKeyboard()
         }
+        // RecyclerViewがタッチされたときにフォーカスを設定
         binding.recyclerViewSearchResult.setOnTouchListener { view, motionEvent ->
             Log.d("test", "touch")
             binding.recyclerViewSearchResult.requestFocus()
             true
         }
 
+        // back button
         binding.imageviewBackButton.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -53,6 +58,7 @@ class SearchResultFragment : Fragment() {
         _binding = null
     }
 
+    // キーボードを表示
     private fun showSoftKeyboard(view: View) {
         if (view.requestFocus()) {
             val imm = requireContext().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
@@ -60,9 +66,9 @@ class SearchResultFragment : Fragment() {
         }
     }
 
+    // キーボードを隠す
     private fun showOffKeyboard() {
         val imm = requireContext().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(binding.root.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
     }
-
 }
