@@ -16,4 +16,5 @@
     <dimen name="margin_min">16dp</dimen>
     <dimen name="elevation">12dp</dimen>
     <dimen name="text_size_min">12sp</dimen>
+    <dimen name="search_view_margin">8dp</dimen>
 </resources>
