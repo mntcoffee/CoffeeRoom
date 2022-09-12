@@ -13,15 +13,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coffeeroom.R
+import com.example.coffeeroom.data.model.coffee.Coffee
 import com.example.coffeeroom.databinding.FragmentCoffeeListBinding
 import com.example.coffeeroom.databinding.FragmentSearchResultBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchResultFragment : Fragment(), TextWatcher {
 
     private var _binding: FragmentSearchResultBinding? = null
     private val binding get() = _binding!!
+
+    private val searchResultViewModel: SearchResultViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +41,23 @@ class SearchResultFragment : Fragment(), TextWatcher {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // RecyclerView
+        val list = binding.recyclerViewSearchResult
+        val adapter = CoffeeListAdapter()
+        adapter.setOnItemClickListener(
+            object : CoffeeListAdapter.OnItemClickListener {
+                override fun onClick(coffee: Coffee) {
+                    Log.d("test", coffee.toString())
+                    val id: Long = coffee.id
+                    val action = CoffeeListFragmentDirections
+                        .actionCoffeeListFragmentToCoffeeDetailFragment(id)
+                    findNavController().navigate(action)
+                }
+            }
+        )
+        list.adapter = adapter
+        list.layoutManager = LinearLayoutManager(context)
 
         // 画面生成時にキーボードを表示
         showSoftKeyboard(binding.edittextSearch)
@@ -50,6 +74,10 @@ class SearchResultFragment : Fragment(), TextWatcher {
         }
 
         binding.edittextSearch.addTextChangedListener(this)
+
+        searchResultViewModel.searchedCoffee.observe(viewLifecycleOwner) { searchedList ->
+            adapter.submitList(searchedList)
+        }
 
         // back button
         binding.imageviewBackButton.setOnClickListener {
@@ -85,8 +113,7 @@ class SearchResultFragment : Fragment(), TextWatcher {
     }
 
     override fun afterTextChanged(p0: Editable?) {
-        if(!p0.isNullOrBlank()) {
-            Log.d("search", "text: ${p0.toString()}")
-        }
+        Log.d("search", "text: ${p0.toString()}")
+        searchResultViewModel.searchCoffee(p0.toString())
     }
 }
