@@ -37,6 +37,10 @@ interface CoffeeDao {
     @Query("SELECT * FROM coffee_table WHERE is_favorite = 1")
     fun getFavoriteCoffee(): Flow<List<Coffee>>
 
+    // 検索ワードからコーヒーを取得
+    @Query("SELECT * FROM coffee_table WHERE title LIKE '%' || :text || '%'")
+    suspend fun getSearchedCoffee(text: String): List<Coffee>
+
     // データベースに追加
     @Insert
     suspend fun insertCoffee(coffee: Coffee)

@@ -24,6 +24,13 @@ class CoffeeRepository @Inject constructor(
     val favoriteCoffee: Flow<List<Coffee>> = coffeeDao.getFavoriteCoffee()
 
     @WorkerThread
+    suspend fun searchCoffee(text: String): List<Coffee> {
+        return withContext(Dispatchers.IO) {
+            coffeeDao.getSearchedCoffee(text)
+        }
+    }
+
+    @WorkerThread
     suspend fun insertCoffee(coffee: Coffee) {
         withContext(Dispatchers.IO) {
             coffeeDao.insertCoffee(coffee)
