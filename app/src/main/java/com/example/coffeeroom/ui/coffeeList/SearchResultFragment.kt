@@ -50,8 +50,8 @@ class SearchResultFragment : Fragment(), TextWatcher {
                 override fun onClick(coffee: Coffee) {
                     Log.d("test", coffee.toString())
                     val id: Long = coffee.id
-                    val action = CoffeeListFragmentDirections
-                        .actionCoffeeListFragmentToCoffeeDetailFragment(id)
+                    val action = SearchResultFragmentDirections
+                        .actionSearchResultFragmentToCoffeeDetailFragment(id)
                     findNavController().navigate(action)
                 }
             }
@@ -70,11 +70,13 @@ class SearchResultFragment : Fragment(), TextWatcher {
         binding.recyclerViewSearchResult.setOnTouchListener { view, motionEvent ->
             Log.d("test", "touch")
             binding.recyclerViewSearchResult.requestFocus()
-            true
+            false
         }
 
+        // editTextのwatcher
         binding.edittextSearch.addTextChangedListener(this)
 
+        // 検索結果でリストを更新
         searchResultViewModel.searchedCoffee.observe(viewLifecycleOwner) { searchedList ->
             adapter.submitList(searchedList)
         }

@@ -45,5 +45,9 @@
         android:id="@+id/searchResultFragment"
         android:name="com.example.coffeeroom.ui.coffeeList.SearchResultFragment"
         android:label="fragment_search_result"
-        tools:layout="@layout/fragment_search_result" />
+        tools:layout="@layout/fragment_search_result" >
+        <action
+            android:id="@+id/action_searchResultFragment_to_coffeeDetailFragment"
+            app:destination="@id/coffeeDetailFragment" />
+    </fragment>
 </navigation>
