@@ -3,6 +3,8 @@ package com.example.coffeeroom.ui.coffeeList
 import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,7 +18,7 @@ import com.example.coffeeroom.R
 import com.example.coffeeroom.databinding.FragmentCoffeeListBinding
 import com.example.coffeeroom.databinding.FragmentSearchResultBinding
 
-class SearchResultFragment : Fragment() {
+class SearchResultFragment : Fragment(), TextWatcher {
 
     private var _binding: FragmentSearchResultBinding? = null
     private val binding get() = _binding!!
@@ -47,6 +49,8 @@ class SearchResultFragment : Fragment() {
             true
         }
 
+        binding.edittextSearch.addTextChangedListener(this)
+
         // back button
         binding.imageviewBackButton.setOnClickListener {
             findNavController().popBackStack()
@@ -70,5 +74,19 @@ class SearchResultFragment : Fragment() {
     private fun showOffKeyboard() {
         val imm = requireContext().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(binding.root.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+    }
+
+    override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+    }
+
+    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+    }
+
+    override fun afterTextChanged(p0: Editable?) {
+        if(!p0.isNullOrBlank()) {
+            Log.d("search", "text: ${p0.toString()}")
+        }
     }
 }
