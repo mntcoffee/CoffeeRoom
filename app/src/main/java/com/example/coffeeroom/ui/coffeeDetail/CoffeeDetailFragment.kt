@@ -50,6 +50,7 @@ class CoffeeDetailFragment : Fragment() {
                 textviewRoasterData.text = coffeeDetail.roaster
                 textviewRoastingDegreeData.text = coffeeDetail.roastingDegree
                 textviewComment.text = coffeeDetail.comment
+                textviewUpdate.text = coffeeDetail.updatedAt
             }
         }
 

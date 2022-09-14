@@ -10,8 +10,8 @@ import java.util.*
 @Entity(tableName = "coffee_table")
 data class Coffee(
     @PrimaryKey(autoGenerate = true) val id: Long,
-    @ColumnInfo(name = "created_at") val createdAt: Date,
-    @ColumnInfo(name = "updated_at") val updatedAt: Date,
+    @ColumnInfo(name = "created_at") val createdAt: String,
+    @ColumnInfo(name = "updated_at") val updatedAt: String,
     @ColumnInfo(name = "is_favorite") val isFavorite: Boolean,
 //    val image: Bitmap?,
     val title: String?,

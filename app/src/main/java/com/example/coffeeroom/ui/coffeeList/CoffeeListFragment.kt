@@ -61,8 +61,8 @@ class CoffeeListFragment : Fragment() {
         // sample data
         val coffee = Coffee(
             id = 0L,
-            createdAt = Date(),
-            updatedAt = Date(),
+            createdAt = "2022/10/4 12:43",
+            updatedAt = "2022/10/6 14:11",
             isFavorite = true,
             title = "Columbia ABC Farm Neon Tet Angels Natural",
             country = "Columbia",

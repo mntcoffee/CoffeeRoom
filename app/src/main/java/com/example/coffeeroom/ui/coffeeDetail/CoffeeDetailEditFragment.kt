@@ -12,6 +12,8 @@ import androidx.navigation.fragment.navArgs
 import com.example.coffeeroom.data.model.coffee.Coffee
 import com.example.coffeeroom.databinding.FragmentCoffeeDetailEditBinding
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 @AndroidEntryPoint
@@ -37,12 +39,15 @@ class CoffeeDetailEditFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         Log.d("test", args.coffeeID.toString())
+        // coffeeIDが0でないなら編集モード
         val coffeeID = args.coffeeID
+        val isEditMode = (coffeeID != 0L)
         // 編集モード(IDが0ではない)場合はIDのコーヒー情報をセット
-        if(coffeeID != 0L) {
+        if(isEditMode) {
             coffeeDetailViewModel.onStart(args.coffeeID)
         }
 
+        // editTextにコーヒーデータをセット
         coffeeDetailViewModel.coffeeDetail.observe(viewLifecycleOwner) { coffeeDetail ->
             binding.apply {
                 edittextTitle.editText?.setText(coffeeDetail.title)
@@ -56,12 +61,17 @@ class CoffeeDetailEditFragment : Fragment() {
         }
 
         binding.buttonSave.setOnClickListener {
+            // get current time
+            val updatedTime = LocalDateTime.now()
+            val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")
+            val formattedUpdatedTime = updatedTime.format(formatter)
+            Log.d("detail", formattedUpdatedTime)
             // create coffee from EditText
-
             val coffee = Coffee(
                     id = coffeeID,
-                    createdAt = Date(),
-                    updatedAt = Date(),
+                    createdAt = coffeeDetailViewModel.coffeeDetail
+                        .value?.createdAt ?: formattedUpdatedTime,
+                    updatedAt = formattedUpdatedTime,
                     isFavorite = false,
                     title = binding.edittextTitle.editText?.text.toString(),
                     country = binding.edittextCountry.editText?.text.toString(),
@@ -73,13 +83,13 @@ class CoffeeDetailEditFragment : Fragment() {
                 )
 
 //            Log.d("test", binding.edittextTitle.editText?.text.toString())
-            if(coffeeID == 0L) {
-                Log.d("test", "add: ${coffee.toString()}")
-                coffeeDetailViewModel.add(coffee)
-                findNavController().popBackStack()
-            } else {
+            if(isEditMode) {
                 Log.d("test", "edit: ${coffee.toString()}")
                 coffeeDetailViewModel.update(coffee)
+                findNavController().popBackStack()
+            } else {
+                Log.d("test", "add: ${coffee.toString()}")
+                coffeeDetailViewModel.add(coffee)
                 findNavController().popBackStack()
             }
         }
