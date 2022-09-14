@@ -1,4 +1,4 @@
-package com.example.coffeeroom.ui.coffeeList
+package com.example.coffeeroom.ui.search
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchResultViewModel
+class SearchViewModel
 @Inject constructor(
     private val coffeeRepository: CoffeeRepository
 ): ViewModel() {
