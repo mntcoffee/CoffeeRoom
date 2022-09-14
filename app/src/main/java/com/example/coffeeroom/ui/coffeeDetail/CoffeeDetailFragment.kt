@@ -1,6 +1,7 @@
 package com.example.coffeeroom.ui.coffeeDetail
 
 import android.os.Bundle
+import android.provider.SyncStateContract.Helpers.update
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -50,7 +51,7 @@ class CoffeeDetailFragment : Fragment() {
                 textviewRoasterData.text = coffeeDetail.roaster
                 textviewRoastingDegreeData.text = coffeeDetail.roastingDegree
                 textviewComment.text = coffeeDetail.comment
-                textviewUpdate.text = coffeeDetail.updatedAt
+                textviewUpdate.text = getString(R.string.updated_at, coffeeDetail.updatedAt)
             }
         }
 
