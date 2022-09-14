@@ -25,4 +25,7 @@
     <string name="sample_roasting_degree">City Roast</string>
     <string name="search">検索</string>
     <string name="updated_at">最終更新日: %s</string>
+    <string name="untitled">Untitled</string>
+    <string name="unknown">Unknown</string>
+    <string name="not_yet_commented">Not yet commented</string>
 </resources>

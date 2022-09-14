@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.coffeeroom.R
 import com.example.coffeeroom.data.model.coffee.Coffee
 import com.example.coffeeroom.databinding.FragmentCoffeeDetailEditBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -67,19 +68,37 @@ class CoffeeDetailEditFragment : Fragment() {
             val formattedUpdatedTime = updatedTime.format(formatter)
             Log.d("detail", formattedUpdatedTime)
             // create coffee from EditText
+            var title = binding.edittextTitle.editText?.text.toString()
+            var country = binding.edittextCountry.editText?.text.toString()
+            var farm = binding.edittextFarm.editText?.text.toString()
+            var process = binding.edittextProcess.editText?.text.toString()
+            var roaster = binding.edittextRoaster.editText?.text.toString()
+            var roastingDegree = binding.edittextRoastingDegree.editText?.text.toString()
+            var comment = binding.edittextComment.editText?.text.toString()
+
+            // if not input data, set some text
+            if(title.isBlank()) title = getString(R.string.untitled)
+            if(country.isBlank()) country = getString(R.string.unknown)
+            if(farm.isBlank()) farm = getString(R.string.unknown)
+            if(process.isBlank()) process = getString(R.string.unknown)
+            if(roaster.isBlank()) roaster = getString(R.string.unknown)
+            if(roastingDegree.isBlank()) roastingDegree = getString(R.string.unknown)
+            if(comment.isBlank()) comment = getString(R.string.not_yet_commented)
+
+            // create updated coffee
             val coffee = Coffee(
                     id = coffeeID,
                     createdAt = coffeeDetailViewModel.coffeeDetail
                         .value?.createdAt ?: formattedUpdatedTime,
                     updatedAt = formattedUpdatedTime,
                     isFavorite = false,
-                    title = binding.edittextTitle.editText?.text.toString(),
-                    country = binding.edittextCountry.editText?.text.toString(),
-                    farm = binding.edittextFarm.editText?.text.toString(),
-                    process = binding.edittextProcess.editText?.text.toString(),
-                    roaster = binding.edittextRoaster.editText?.text.toString(),
-                    roastingDegree = binding.edittextRoastingDegree.editText?.text.toString(),
-                    comment = binding.edittextComment.editText?.text.toString()
+                    title = title,
+                    country = country,
+                    farm = farm,
+                    process = process,
+                    roaster = roaster,
+                    roastingDegree = roastingDegree,
+                    comment = comment
                 )
 
 //            Log.d("test", binding.edittextTitle.editText?.text.toString())
