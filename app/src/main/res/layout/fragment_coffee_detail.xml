@@ -184,7 +184,7 @@
                 android:layout_marginTop="@dimen/textview_margin"/>
 
             <ToggleButton
-                android:id="@+id/toggleButton"
+                android:id="@+id/togglebutton_favorite"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/favorite_button_selector"

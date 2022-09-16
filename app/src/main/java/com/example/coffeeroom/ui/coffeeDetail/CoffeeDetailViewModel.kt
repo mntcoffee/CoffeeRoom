@@ -16,12 +16,13 @@ class CoffeeDetailViewModel
     private val coffeeRepository: CoffeeRepository
 ): ViewModel() {
 
-    private val _coffeeDetail = MutableLiveData<Coffee>()
+    private var _coffeeDetail = MutableLiveData<Coffee>()
     val coffeeDetail: LiveData<Coffee> get() = _coffeeDetail
 
     fun onStart(id: Long) {
         viewModelScope.launch {
             _coffeeDetail.value = coffeeRepository.getCoffee(id)
+            Log.d("favorite", "onStart: ${_coffeeDetail.value.toString()}")
         }
     }
 
@@ -35,5 +36,12 @@ class CoffeeDetailViewModel
         viewModelScope.launch {
             coffeeRepository.insertCoffee(coffee)
         }
+    }
+
+    fun updateFavorite(isChecked: Boolean) {
+        Log.d("favorite", "is favorite: $isChecked")
+        val coffee = _coffeeDetail.value?.copy(isFavorite = isChecked)
+        Log.d("favorite", "update: ${coffee.toString()}")
+        update(coffee!!)
     }
 }

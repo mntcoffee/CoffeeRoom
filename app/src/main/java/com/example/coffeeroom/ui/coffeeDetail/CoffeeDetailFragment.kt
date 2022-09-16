@@ -41,17 +41,36 @@ class CoffeeDetailFragment : Fragment() {
         val coffeeID = args.coffeeID
         coffeeDetailViewModel.onStart(coffeeID)
 
-        // set text from coffee[coffeeID]
+        // set info from coffee[coffeeID]
         coffeeDetailViewModel.coffeeDetail.observe(viewLifecycleOwner) { coffeeDetail ->
+            // if not input data, set some text
+            var title = coffeeDetail.title!!
+            var country = coffeeDetail.country!!
+            var farm = coffeeDetail.farm!!
+            var process = coffeeDetail.process!!
+            var roaster = coffeeDetail.roaster!!
+            var roastingDegree = coffeeDetail.roastingDegree!!
+            var comment = coffeeDetail.comment!!
+
+            if(title.isBlank()) title = getString(R.string.untitled)
+            if(country.isBlank()) country = getString(R.string.unknown)
+            if(farm.isBlank()) farm = getString(R.string.unknown)
+            if(process.isBlank()) process = getString(R.string.unknown)
+            if(roaster.isBlank()) roaster = getString(R.string.unknown)
+            if(roastingDegree.isBlank()) roastingDegree = getString(R.string.unknown)
+            if(comment.isBlank()) comment = getString(R.string.not_yet_commented)
+
+            // set textView
             binding.apply {
-                textviewTitle.text = coffeeDetail.title
-                textviewCountryData.text = coffeeDetail.country
-                textviewFarmData.text = coffeeDetail.farm
-                textviewProcessData.text = coffeeDetail.process
-                textviewRoasterData.text = coffeeDetail.roaster
-                textviewRoastingDegreeData.text = coffeeDetail.roastingDegree
-                textviewComment.text = coffeeDetail.comment
+                textviewTitle.text = title
+                textviewCountryData.text = country
+                textviewFarmData.text = farm
+                textviewProcessData.text = process
+                textviewRoasterData.text = roaster
+                textviewRoastingDegreeData.text = roastingDegree
+                textviewComment.text = comment
                 textviewUpdate.text = getString(R.string.updated_at, coffeeDetail.updatedAt)
+                togglebuttonFavorite.isChecked = coffeeDetail.isFavorite
             }
         }
 
@@ -61,6 +80,12 @@ class CoffeeDetailFragment : Fragment() {
                 .actionCoffeeDetailFragmentToCoffeeDetailEditFragment(coffeeID)
             findNavController().navigate(action)
         }
+        
+        // favorite button
+        binding.togglebuttonFavorite.setOnCheckedChangeListener { _, isChecked ->
+            coffeeDetailViewModel.updateFavorite(isChecked)
+        }
+
     }
 
     override fun onDestroyView() {

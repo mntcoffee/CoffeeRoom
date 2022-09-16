@@ -67,7 +67,7 @@ class CoffeeDetailEditFragment : Fragment() {
             val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")
             val formattedUpdatedTime = updatedTime.format(formatter)
             Log.d("detail", formattedUpdatedTime)
-            // create coffee from EditText
+            // create coffee info from EditText
             var title = binding.edittextTitle.editText?.text.toString()
             var country = binding.edittextCountry.editText?.text.toString()
             var farm = binding.edittextFarm.editText?.text.toString()
@@ -75,15 +75,6 @@ class CoffeeDetailEditFragment : Fragment() {
             var roaster = binding.edittextRoaster.editText?.text.toString()
             var roastingDegree = binding.edittextRoastingDegree.editText?.text.toString()
             var comment = binding.edittextComment.editText?.text.toString()
-
-            // if not input data, set some text
-            if(title.isBlank()) title = getString(R.string.untitled)
-            if(country.isBlank()) country = getString(R.string.unknown)
-            if(farm.isBlank()) farm = getString(R.string.unknown)
-            if(process.isBlank()) process = getString(R.string.unknown)
-            if(roaster.isBlank()) roaster = getString(R.string.unknown)
-            if(roastingDegree.isBlank()) roastingDegree = getString(R.string.unknown)
-            if(comment.isBlank()) comment = getString(R.string.not_yet_commented)
 
             // create updated coffee
             val coffee = Coffee(
