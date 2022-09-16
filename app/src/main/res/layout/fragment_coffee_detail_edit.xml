@@ -167,8 +167,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_input_comment"
                 android:textSize="@dimen/text_size_detail"
-                android:inputType="text"
-                android:maxLines="3"/>
+                android:inputType="textMultiLine"
+                android:minLines="1"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
