@@ -9,7 +9,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_keyboard_backspace_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
-        <entry key="app/src/main/res/layout/fragment_camera.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_camera.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_coffee_detail.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_coffee_detail_add.xml" value="0.14907407407407408" />
         <entry key="app/src/main/res/layout/fragment_coffee_detail_edit.xml" value="0.1925925925925926" />
