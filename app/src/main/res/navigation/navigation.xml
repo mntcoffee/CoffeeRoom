@@ -28,6 +28,9 @@
         <argument
             android:name="coffeeID"
             app:argType="long" />
+        <action
+            android:id="@+id/action_coffeeDetailEditFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment" />
     </fragment>
     <fragment
         android:id="@+id/coffeeDetailFragment"
@@ -50,4 +53,9 @@
             android:id="@+id/action_searchFragment_to_coffeeDetailFragment"
             app:destination="@id/coffeeDetailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="com.example.coffeeroom.ui.camera.CameraFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera" />
 </navigation>

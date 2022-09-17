@@ -25,6 +25,8 @@ class CoffeeDetailEditFragment : Fragment(), SetImageDialogFragment.NoticeDialog
 
     private val args: CoffeeDetailEditFragmentArgs by navArgs()
 
+    private lateinit var dialog: DialogFragment
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -104,8 +106,8 @@ class CoffeeDetailEditFragment : Fragment(), SetImageDialogFragment.NoticeDialog
 
         // edit imageView
         binding.imageviewCoffee.setOnClickListener {
-            val newFragment = SetImageDialogFragment()
-            newFragment.show(childFragmentManager, "image")
+            dialog = SetImageDialogFragment()
+            dialog.show(childFragmentManager, "image")
         }
     }
 
@@ -116,10 +118,15 @@ class CoffeeDetailEditFragment : Fragment(), SetImageDialogFragment.NoticeDialog
 
     override fun onDialogCameraClick(dialog: DialogFragment) {
         Log.d("dialog", "camera")
+        dialog.dismiss()
+        val action = CoffeeDetailEditFragmentDirections
+            .actionCoffeeDetailEditFragmentToCameraFragment()
+        findNavController().navigate(action)
     }
 
     override fun onDialogFolderClick(dialog: DialogFragment) {
         Log.d("dialog", "folder")
+        dialog.dismiss()
     }
 
 }
