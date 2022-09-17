@@ -11,6 +11,9 @@ class SetImageDialogFragment : DialogFragment() {
 
     private lateinit var listener: NoticeDialogListener
 
+    private val photoSource = arrayOf("Take a photo", "Select a photo from your folder")
+
+    // カメラから画像取得 or フォルダから画像取得
     interface NoticeDialogListener {
         fun onDialogCameraClick(dialog: DialogFragment)
         fun onDialogFolderClick(dialog: DialogFragment)
@@ -47,7 +50,5 @@ class SetImageDialogFragment : DialogFragment() {
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
-
-    private val photoSource = arrayOf("Take a photo", "Select a photo from your folder")
 
 }
