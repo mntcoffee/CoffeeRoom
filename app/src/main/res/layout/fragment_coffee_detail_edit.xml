@@ -23,6 +23,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_baseline_photo_camera_24"
+            app:layout_constraintStart_toStartOf="@id/imageview_coffee"
+            app:layout_constraintTop_toTopOf="@id/imageview_coffee"
+            app:layout_constraintEnd_toEndOf="@id/imageview_coffee"
+            app:layout_constraintBottom_toBottomOf="@id/imageview_coffee"/>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edittext_title"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
