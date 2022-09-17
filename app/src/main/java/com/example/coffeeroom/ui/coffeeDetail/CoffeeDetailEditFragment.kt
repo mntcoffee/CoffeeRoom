@@ -2,23 +2,21 @@ package com.example.coffeeroom.ui.coffeeDetail
 
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.coffeeroom.R
 import com.example.coffeeroom.data.model.coffee.Coffee
 import com.example.coffeeroom.databinding.FragmentCoffeeDetailEditBinding
+import com.example.coffeeroom.ui.dialog.SetImageDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
 
 @AndroidEntryPoint
-class CoffeeDetailEditFragment : Fragment() {
+class CoffeeDetailEditFragment : Fragment(), SetImageDialogFragment.NoticeDialogListener {
 
     private var _binding: FragmentCoffeeDetailEditBinding? = null
     private val binding get() = _binding!!
@@ -103,11 +101,25 @@ class CoffeeDetailEditFragment : Fragment() {
                 findNavController().popBackStack()
             }
         }
+
+        // edit imageView
+        binding.imageviewCoffee.setOnClickListener {
+            val newFragment = SetImageDialogFragment()
+            newFragment.show(childFragmentManager, "image")
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onDialogCameraClick(dialog: DialogFragment) {
+        Log.d("dialog", "camera")
+    }
+
+    override fun onDialogFolderClick(dialog: DialogFragment) {
+        Log.d("dialog", "folder")
     }
 
 }

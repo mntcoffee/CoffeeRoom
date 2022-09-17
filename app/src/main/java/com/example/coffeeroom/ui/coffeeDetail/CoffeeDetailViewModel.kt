@@ -2,11 +2,9 @@ package com.example.coffeeroom.ui.coffeeDetail
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.coffeeroom.R
 import com.example.coffeeroom.data.model.coffee.Coffee
 import com.example.coffeeroom.data.repository.CoffeeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -44,4 +42,5 @@ class CoffeeDetailViewModel
         Log.d("favorite", "update: ${coffee.toString()}")
         update(coffee!!)
     }
+
 }
