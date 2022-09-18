@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import kotlin.reflect.typeOf
 
 class CameraFragment : Fragment() {
 
@@ -55,7 +56,6 @@ class CameraFragment : Fragment() {
         }
 
         binding.buttonTakePhoto.setOnClickListener {
-            // [TODO] take photo
             takePhoto()
         }
 
@@ -114,6 +114,10 @@ class CameraFragment : Fragment() {
                     val msg = "Photo capture succeeded: ${output.savedUri}"
                     Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, msg)
+                    Log.d("test", "${output.javaClass.kotlin}")
+                    val action = CameraFragmentDirections
+                        .actionCameraFragmentToCameraResultFragment(output.savedUri.toString())
+                    findNavController().navigate(action)
                 }
             }
         )

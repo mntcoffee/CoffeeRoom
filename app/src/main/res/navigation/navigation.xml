@@ -57,5 +57,19 @@
         android:id="@+id/cameraFragment"
         android:name="com.example.coffeeroom.ui.camera.CameraFragment"
         android:label="fragment_camera"
-        tools:layout="@layout/fragment_camera" />
+        tools:layout="@layout/fragment_camera" >
+        <action
+            android:id="@+id/action_cameraFragment_to_cameraResultFragment"
+            app:destination="@id/cameraResultFragment"
+            app:popUpTo="@id/coffeeDetailEditFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/cameraResultFragment"
+        android:name="com.example.coffeeroom.ui.camera.CameraResultFragment"
+        android:label="fragment_camera_result"
+        tools:layout="@layout/fragment_camera_result">
+        <argument
+            android:name="cameraResultURI"
+            app:argType="string" />
+    </fragment>
 </navigation>
