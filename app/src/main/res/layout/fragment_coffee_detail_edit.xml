@@ -18,7 +18,7 @@
             android:layout_width="@dimen/image_size_coffee_detail"
             android:layout_height="@dimen/image_size_coffee_detail"
             android:layout_marginTop="@dimen/image_margin"
-            android:src="@drawable/ic_baseline_android_24"
+            android:src="@drawable/coffee_image_default"
             android:alpha="0.5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

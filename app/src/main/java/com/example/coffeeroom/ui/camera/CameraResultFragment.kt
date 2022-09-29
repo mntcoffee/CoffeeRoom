@@ -11,10 +11,8 @@ import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.coffeeroom.R
-import com.example.coffeeroom.databinding.FragmentCameraBinding
 import com.example.coffeeroom.databinding.FragmentCameraResultBinding
-import com.example.coffeeroom.ui.coffeeDetail.CoffeeDetailEditFragmentArgs
+import com.example.coffeeroom.ui.coffeeDetail.CoffeeDetailViewModel
 import java.io.BufferedInputStream
 
 class CameraResultFragment : Fragment() {
@@ -48,7 +46,9 @@ class CameraResultFragment : Fragment() {
         }
 
         binding.buttonApplyCameraResult.setOnClickListener {
-
+            val navigation = findNavController()
+            navigation.previousBackStackEntry?.savedStateHandle?.set("key", uri)
+            navigation.popBackStack()
         }
 
     }

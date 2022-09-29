@@ -51,7 +51,7 @@ interface CoffeeDao {
 
     // データベースからIDで1件取得
     @Query("SELECT * FROM coffee_table WHERE id = :id")
-    suspend fun getCoffee(id: Long): Coffee
+    fun getCoffee(id: Long): Flow<Coffee>
 
     // データベースから1件削除
     @Delete

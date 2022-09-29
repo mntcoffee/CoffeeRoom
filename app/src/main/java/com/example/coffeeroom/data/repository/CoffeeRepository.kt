@@ -6,9 +6,11 @@ import com.example.coffeeroom.data.model.coffee.CoffeeDao
 import dagger.Provides
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlin.coroutines.suspendCoroutine
 
 class CoffeeRepository @Inject constructor(
     private val coffeeDao: CoffeeDao
@@ -51,11 +53,14 @@ class CoffeeRepository @Inject constructor(
         }
     }
 
-    @WorkerThread
-    suspend fun getCoffee(id: Long): Coffee {
-        return withContext(Dispatchers.IO) {
-            coffeeDao.getCoffee(id)
-        }
+//    @WorkerThread
+//    suspend fun getCoffee(id: Long): Coffee {
+//        return withContext(Dispatchers.IO) {
+//                coffeeDao.getCoffee(id)
+//        }
+//    }
+    fun getCoffee(id: Long): Flow<Coffee> {
+        return coffeeDao.getCoffee(id)
     }
 
     @WorkerThread

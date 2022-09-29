@@ -59,19 +59,19 @@ class CoffeeListFragment : Fragment() {
         list.layoutManager = LinearLayoutManager(context)
 
         // sample data
-        val coffee = Coffee(
-            id = 0L,
-            createdAt = "2022/10/4 12:43",
-            updatedAt = "2022/10/6 14:11",
-            isFavorite = true,
-            title = "Columbia ABC Farm Neon Tet Angels Natural",
-            country = "Columbia",
-            farm = "ABC Farm",
-            process = "Natural",
-            roaster = "ABC roaster",
-            roastingDegree = "medium",
-            comment = "It is very delicious."
-        )
+//        val coffee = Coffee(
+//            id = 0L,
+//            createdAt = "2022/10/4 12:43",
+//            updatedAt = "2022/10/6 14:11",
+//            isFavorite = true,
+//            title = "Columbia ABC Farm Neon Tet Angels Natural",
+//            country = "Columbia",
+//            farm = "ABC Farm",
+//            process = "Natural",
+//            roaster = "ABC roaster",
+//            roastingDegree = "medium",
+//            comment = "It is very delicious."
+//        )
 
         coffeeListViewModel.allCoffee.observe(viewLifecycleOwner) { allCoffee ->
             allCoffee.let { adapter.submitList(it) }
