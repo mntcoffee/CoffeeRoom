@@ -18,11 +18,11 @@
             android:layout_width="@dimen/image_size_coffee_detail"
             android:layout_height="@dimen/image_size_coffee_detail"
             android:layout_marginTop="@dimen/image_margin"
-            android:src="@drawable/coffee_image_default"
             android:alpha="0.5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
             android:layout_width="50dp"
