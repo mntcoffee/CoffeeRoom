@@ -12,6 +12,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
@@ -51,8 +53,7 @@ class CameraFragment : Fragment() {
         if (allPermissionsGranted()) {
             startCamera()
         } else {
-            ActivityCompat.requestPermissions(
-                requireActivity(), REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
+            requestPermission()
         }
 
         binding.buttonTakePhoto.setOnClickListener {
@@ -124,6 +125,7 @@ class CameraFragment : Fragment() {
     }
 
     private fun startCamera() {
+        Log.d("camera", "start")
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
 
         cameraProviderFuture.addListener({
@@ -161,24 +163,25 @@ class CameraFragment : Fragment() {
             requireContext(), it) == PackageManager.PERMISSION_GRANTED
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        if (requestCode == REQUEST_CODE_PERMISSIONS) {
-            if (allPermissionsGranted()) {
+    private fun requestPermission() {
+        val requestPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { result ->
+            if(result) {
                 startCamera()
-            } else {
-                Log.d("camera", "permission denied")
             }
+            else {
+                Toast.makeText(activity, "permission denied", Toast.LENGTH_SHORT).show()
+                findNavController().popBackStack()
+            }
+        }
+        // アクセスしたい権限を引数に渡す
+        REQUIRED_PERMISSIONS.forEach {
+            requestPermission.launch(it)
         }
     }
 
     companion object {
-        private const val TAG = "CameraXApp"
+        private const val TAG = "CameraX"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
-        private const val REQUEST_CODE_PERMISSIONS = 10
         private val REQUIRED_PERMISSIONS =
             mutableListOf (
                 Manifest.permission.CAMERA,
