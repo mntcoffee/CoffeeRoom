@@ -126,21 +126,23 @@ class CoffeeDetailEditFragment : Fragment(), SetImageDialogFragment.NoticeDialog
             edittextRoaster.editText?.setText(coffee.roaster)
             edittextRoastingDegree.editText?.setText(coffee.roastingDegree)
             edittextComment.editText?.setText(coffee.comment)
-            if(coffee.image != null) {
-                imageviewCoffee.setImageBitmap(
-                    cameraViewModel.uriToBitmap(coffee.image, requireContext())
-                )
-                coffeeDetailViewModel.setImage(coffee.image)
-            } else {
-                imageviewCoffee.setImageResource(R.drawable.coffee_image_default)
-            }
-            // camera or folderから画像が返された場合はそれを表示
+
             if(coffeeDetailViewModel.coffeeImage.value != null) {
+                Log.d("image", "camera")
                 val bitmap = cameraViewModel.uriToBitmap(
                     coffeeDetailViewModel.coffeeImage.value!!,
                     requireContext()
                 )
                 imageviewCoffee.setImageBitmap(cameraViewModel.rotateBitmap(bitmap))
+            } else if(coffee.image != null) {
+                Log.d("image", "database")
+                imageviewCoffee.setImageBitmap(
+                    cameraViewModel.uriToBitmap(coffee.image, requireContext())
+                )
+                coffeeDetailViewModel.setImage(coffee.image)
+            } else {
+                Log.d("image", "default")
+                imageviewCoffee.setImageResource(R.drawable.coffee_image_default)
             }
         }
     }
