@@ -61,6 +61,8 @@ class CoffeeDetailEditFragment : Fragment(), SetImageDialogFragment.NoticeDialog
             coffeeDetailViewModel.coffeeDetail.observe(viewLifecycleOwner) { coffee ->
                 setCoffeeDetail(coffee)
             }
+        } else {
+            binding.imageviewCoffee.setImageResource(R.drawable.coffee_image_default)
         }
 
         // callback from camera result
