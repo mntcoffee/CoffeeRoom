@@ -1,6 +1,5 @@
 package com.example.coffeeroom.ui.coffeeList
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.coffeeroom.data.model.coffee.Coffee
 import com.example.coffeeroom.data.repository.CoffeeRepository

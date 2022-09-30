@@ -1,14 +1,12 @@
 package com.example.coffeeroom.ui.coffeeDetail
 
-import android.graphics.Bitmap
-import android.graphics.Matrix
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.coffeeroom.data.model.coffee.Coffee
 import com.example.coffeeroom.data.repository.CoffeeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel

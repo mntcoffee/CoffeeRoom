@@ -1,13 +1,13 @@
 package com.example.coffeeroom.ui.coffeeDetail
 
-import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.*
-import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -18,7 +18,6 @@ import com.example.coffeeroom.databinding.FragmentCoffeeDetailEditBinding
 import com.example.coffeeroom.ui.camera.CameraViewModel
 import com.example.coffeeroom.ui.dialog.SetImageDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.BufferedInputStream
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
