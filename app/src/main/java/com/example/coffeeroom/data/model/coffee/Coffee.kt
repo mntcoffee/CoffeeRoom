@@ -1,6 +1,7 @@
 package com.example.coffeeroom.data.model.coffee
 
 import android.graphics.Bitmap
+import android.net.Uri
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -14,7 +15,7 @@ data class Coffee(
     @ColumnInfo(name = "created_at") val createdAt: String,
     @ColumnInfo(name = "updated_at") val updatedAt: String,
     @ColumnInfo(name = "is_favorite") val isFavorite: Boolean,
-    val image: Bitmap?,
+    val image: Uri?,
     val title: String?,
     val country: String?,
     val farm: String?,

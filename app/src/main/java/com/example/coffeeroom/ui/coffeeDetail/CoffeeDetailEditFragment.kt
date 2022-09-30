@@ -70,8 +70,13 @@ class CoffeeDetailEditFragment : Fragment(), SetImageDialogFragment.NoticeDialog
             saveDataBase(coffeeDetailViewModel.isEditMode)
         }
 
-        coffeeDetailViewModel.coffeeImage.observe(viewLifecycleOwner) { bitmap ->
-            binding.imageviewCoffee.setImageBitmap(bitmap)
+        coffeeDetailViewModel.coffeeImage.observe(viewLifecycleOwner) { uri ->
+            val bitmap = uri?.let {
+                cameraViewModel.uriToBitmap(it, requireContext())
+            }
+            binding.imageviewCoffee.setImageBitmap(bitmap?.let {
+                cameraViewModel.rotateBitmap(it)
+            })
         }
 
         // edit imageView
@@ -104,10 +109,11 @@ class CoffeeDetailEditFragment : Fragment(), SetImageDialogFragment.NoticeDialog
         navigation.currentBackStackEntry?.savedStateHandle?.getLiveData<Uri>("key")
             ?.observe(viewLifecycleOwner) {
                 Log.d("test", it.toString())
-                val inputStream = requireContext().contentResolver.openInputStream(it)
-                val bitmap = BitmapFactory.decodeStream(BufferedInputStream(inputStream))
-                cameraViewModel.rotateBitmap(bitmap)
-                    ?.let { it -> coffeeDetailViewModel.setImage(it) }
+//                val inputStream = requireContext().contentResolver.openInputStream(it)
+//                val bitmap = BitmapFactory.decodeStream(BufferedInputStream(inputStream))
+//                cameraViewModel.rotateBitmap(bitmap)
+//                    ?.let { it -> coffeeDetailViewModel.setImage(it) }
+                coffeeDetailViewModel.setImage(it)
             }
     }
 
@@ -120,14 +126,21 @@ class CoffeeDetailEditFragment : Fragment(), SetImageDialogFragment.NoticeDialog
             edittextRoaster.editText?.setText(coffee.roaster)
             edittextRoastingDegree.editText?.setText(coffee.roastingDegree)
             edittextComment.editText?.setText(coffee.comment)
-            if(coffee.image == null) {
-                imageviewCoffee.setImageResource(R.drawable.coffee_image_default)
+            if(coffee.image != null) {
+                imageviewCoffee.setImageBitmap(
+                    cameraViewModel.uriToBitmap(coffee.image, requireContext())
+                )
+                coffeeDetailViewModel.setImage(coffee.image)
             } else {
-                imageviewCoffee.setImageBitmap(coffee.image)
+                imageviewCoffee.setImageResource(R.drawable.coffee_image_default)
             }
             // camera or folderから画像が返された場合はそれを表示
             if(coffeeDetailViewModel.coffeeImage.value != null) {
-                imageviewCoffee.setImageBitmap(coffeeDetailViewModel.coffeeImage.value)
+                val bitmap = cameraViewModel.uriToBitmap(
+                    coffeeDetailViewModel.coffeeImage.value!!,
+                    requireContext()
+                )
+                imageviewCoffee.setImageBitmap(cameraViewModel.rotateBitmap(bitmap))
             }
         }
     }
@@ -146,7 +159,8 @@ class CoffeeDetailEditFragment : Fragment(), SetImageDialogFragment.NoticeDialog
         var roastingDegree = binding.edittextRoastingDegree.editText?.text.toString()
         var comment = binding.edittextComment.editText?.text.toString()
         // get coffee image
-        val coffeeImage = (binding.imageviewCoffee.drawable as BitmapDrawable)?.bitmap
+//        val coffeeImage = (binding.imageviewCoffee.drawable as BitmapDrawable)?.bitmap
+        val coffeeImage = coffeeDetailViewModel.coffeeImage.value
 
         if(isEditMode) {
             val coffee = coffeeDetailViewModel.coffeeDetail.value?.copy(

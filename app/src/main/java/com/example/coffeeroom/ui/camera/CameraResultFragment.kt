@@ -37,8 +37,7 @@ class CameraResultFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.d("test", "${args.toString()}")
         val uri = args.cameraResultURI.toUri()
-        val inputStream = requireContext().contentResolver.openInputStream(uri)
-        val bitmap = BitmapFactory.decodeStream(BufferedInputStream(inputStream))
+        val bitmap = cameraViewModel.uriToBitmap(uri, requireContext())
         binding.imageviewCameraResult.setImageBitmap(cameraViewModel.rotateBitmap(bitmap))
 
         binding.buttonCancelCameraResult.setOnClickListener {

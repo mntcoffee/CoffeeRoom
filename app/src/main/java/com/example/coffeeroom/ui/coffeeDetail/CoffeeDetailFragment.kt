@@ -1,5 +1,6 @@
 package com.example.coffeeroom.ui.coffeeDetail
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.coffeeroom.R
 import com.example.coffeeroom.data.model.coffee.Coffee
 import com.example.coffeeroom.databinding.FragmentCoffeeDetailBinding
+import com.example.coffeeroom.ui.camera.CameraViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,6 +23,7 @@ class CoffeeDetailFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val coffeeDetailViewModel: CoffeeDetailViewModel by viewModels()
+    private val cameraViewModel: CameraViewModel by viewModels()
 
     private val args: CoffeeDetailFragmentArgs by navArgs()
 
@@ -72,7 +75,7 @@ class CoffeeDetailFragment : Fragment() {
         var roaster = coffee.roaster!!
         var roastingDegree = coffee.roastingDegree!!
         var comment = coffee.comment!!
-        val bitmap = coffee.image
+        val uri: Uri? = coffee.image
 
         if(title.isBlank()) title = getString(R.string.untitled)
         if(country.isBlank()) country = getString(R.string.unknown)
@@ -93,10 +96,15 @@ class CoffeeDetailFragment : Fragment() {
             textviewComment.text = comment
             textviewUpdate.text = getString(R.string.updated_at, coffee.updatedAt)
             togglebuttonFavorite.isChecked = coffee.isFavorite
-            if(coffee.image == null) {
-                imageviewCoffee.setImageResource(R.drawable.coffee_image_default)
+            Log.d("uri", "${uri.toString().isNullOrBlank()}")
+            Log.d("uri", "coffee: $coffee")
+            if(uri != null) {
+                Log.d("uri", "nonnull: called")
+                val bitmap = cameraViewModel.uriToBitmap(uri, requireContext())
+                imageviewCoffee.setImageBitmap(cameraViewModel.rotateBitmap(bitmap))
             } else {
-                imageviewCoffee.setImageBitmap(bitmap)
+                Log.d("uri", "null: called")
+                imageviewCoffee.setImageResource(R.drawable.coffee_image_default)
             }
         }
     }

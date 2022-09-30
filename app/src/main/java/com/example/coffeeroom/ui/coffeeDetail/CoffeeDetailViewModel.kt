@@ -2,6 +2,7 @@ package com.example.coffeeroom.ui.coffeeDetail
 
 import android.graphics.Bitmap
 import android.graphics.Matrix
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.coffeeroom.data.model.coffee.Coffee
@@ -18,8 +19,8 @@ class CoffeeDetailViewModel
 
     lateinit var coffeeDetail: LiveData<Coffee>
 
-    private var _coffeeImage = MutableLiveData<Bitmap?>()
-    val coffeeImage: LiveData<Bitmap?> get() = _coffeeImage
+    private var _coffeeImage = MutableLiveData<Uri?>()
+    val coffeeImage: LiveData<Uri?> get() = _coffeeImage
 
     var isEditMode = false
 
@@ -45,9 +46,9 @@ class CoffeeDetailViewModel
         if(coffee != null) update(coffee)
     }
 
-    fun setImage(bitmap: Bitmap) {
+    fun setImage(uri: Uri) {
         Log.d("image", "called!!")
-        _coffeeImage.value = bitmap
+        _coffeeImage.value = uri
     }
 
 }
