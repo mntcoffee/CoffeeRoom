@@ -25,7 +25,7 @@ class CoffeeListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentCoffeeListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -50,13 +50,9 @@ class CoffeeListFragment : Fragment() {
         list.adapter = adapter
         list.layoutManager = LinearLayoutManager(context)
 
+        // すべてのコーヒーを監視
         coffeeListViewModel.allCoffee.observe(viewLifecycleOwner) { allCoffee ->
             allCoffee.let { adapter.submitList(it) }
-            Log.d("test", allCoffee.toString())
-        }
-
-        coffeeListViewModel.filteredCoffeeList.observe(viewLifecycleOwner) { filteredCoffee ->
-            adapter.submitList(filteredCoffee)
         }
 
         // 新規追加ボタン
@@ -70,12 +66,10 @@ class CoffeeListFragment : Fragment() {
         binding.toolbarCoffeeList.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.search -> {
-                    Log.d("search", "search")
                     val action = CoffeeListFragmentDirections
                         .actionCoffeeListFragmentToSearchResultFragment()
                     findNavController().navigate(action)
                 }
-
             }
             true
         }

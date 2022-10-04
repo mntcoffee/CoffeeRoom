@@ -1,13 +1,9 @@
 package com.example.coffeeroom.data.model.coffee
 
-import android.graphics.Bitmap
 import android.net.Uri
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.net.URI
-import java.time.LocalDate
-import java.util.*
 
 @Entity(tableName = "coffee_table")
 data class Coffee(
@@ -24,4 +20,3 @@ data class Coffee(
     @ColumnInfo(name = "roasting_degree") val roastingDegree: String?,
     val comment: String?
 )
-

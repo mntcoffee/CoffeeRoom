@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.DialogFragment
 
 class SetImageDialogFragment : DialogFragment() {
@@ -36,8 +35,7 @@ class SetImageDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {
             val builder = AlertDialog.Builder(it)
-            builder.setItems(photoSource) { dialog, which ->
-                Log.d("test", "$which")
+            builder.setItems(photoSource) { _, which ->
                 when(which) {
                     0 -> {
                         listener.onDialogCameraClick(this)
@@ -50,5 +48,4 @@ class SetImageDialogFragment : DialogFragment() {
             builder.create()
         } ?: throw IllegalStateException("Activity cannot be null")
     }
-
 }

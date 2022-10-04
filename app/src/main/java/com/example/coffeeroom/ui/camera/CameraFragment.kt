@@ -37,8 +37,7 @@ class CameraFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
         _binding = FragmentCameraBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -46,18 +45,19 @@ class CameraFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Request camera permissions
+        // camera permissionの確認
         if (allPermissionsGranted()) {
             startCamera()
         } else {
             requestPermission()
         }
 
+        // 撮影ボタン
         binding.buttonTakePhoto.setOnClickListener {
             takePhoto()
         }
 
-        // back button
+        // 戻るボタン
         binding.imageviewBackButtonCamera.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -77,10 +77,9 @@ class CameraFragment : Fragment() {
 
 
     private fun takePhoto() {
-        // Get a stable reference of the modifiable image capture use case
         val imageCapture = imageCapture ?: return
 
-        // Create time stamped name and MediaStore entry.
+        // タイムスタンプを用いてファイル名にする
         val name = SimpleDateFormat(FILENAME_FORMAT, Locale.JAPAN)
             .format(System.currentTimeMillis())
         val contentValues = ContentValues().apply {
@@ -91,15 +90,14 @@ class CameraFragment : Fragment() {
             }
         }
 
-        // Create output options object which contains file + metadata
+        // file + metadataを含んだoutputOptions
         val outputOptions = ImageCapture.OutputFileOptions
             .Builder(requireContext().contentResolver,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
                 contentValues)
             .build()
 
-        // Set up image capture listener, which is triggered after photo has
-        // been taken
+        // image capture listenerの設定(takePhotoメソッドの実体)
         imageCapture.takePicture(
             outputOptions,
             ContextCompat.getMainExecutor(requireContext()),
@@ -112,7 +110,7 @@ class CameraFragment : Fragment() {
                     val msg = "Photo capture succeeded: ${output.savedUri}"
                     Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
                     Log.d(TAG, msg)
-                    Log.d("test", "${output.javaClass.kotlin}")
+                    // 画像確認画面に遷移
                     val action = CameraFragmentDirections
                         .actionCameraFragmentToCameraResultFragment(output.savedUri.toString())
                     findNavController().navigate(action)
@@ -122,11 +120,10 @@ class CameraFragment : Fragment() {
     }
 
     private fun startCamera() {
-        Log.d("camera", "start")
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
 
         cameraProviderFuture.addListener({
-            // Used to bind the lifecycle of cameras to the lifecycle owner
+            // cameraのlifecycleをlifecycleOwnerにbind
             val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
 
             // Preview
@@ -137,14 +134,14 @@ class CameraFragment : Fragment() {
                 }
             imageCapture = ImageCapture.Builder().build()
 
-            // Select back camera as a default
+            // 背面カメラをデフォルトに設定
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
             try {
                 // Unbind use cases before rebinding
                 cameraProvider.unbindAll()
 
-                // Bind use cases to camera
+                // Bind useをcameraにbind
                 cameraProvider.bindToLifecycle(
                     this, cameraSelector, imageCapture, preview)
 
@@ -155,22 +152,29 @@ class CameraFragment : Fragment() {
         }, ContextCompat.getMainExecutor(requireContext()))
     }
 
+    // permissionの確認
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
         ContextCompat.checkSelfPermission(
             requireContext(), it) == PackageManager.PERMISSION_GRANTED
     }
 
+    // permissionがない場合リクエスト
     private fun requestPermission() {
-        val requestPermission = registerForActivityResult(ActivityResultContracts.RequestPermission()) { result ->
+        val requestPermission = registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { result ->
             if(result) {
+                // permissionが付与された場合は撮影スタート
                 startCamera()
             }
             else {
+                // permissionが拒否された場合は前の画面に戻る
                 Toast.makeText(activity, "permission denied", Toast.LENGTH_SHORT).show()
                 findNavController().popBackStack()
             }
         }
-        // アクセスしたい権限を引数に渡す
+
+        // permissionの追加
         REQUIRED_PERMISSIONS.forEach {
             requestPermission.launch(it)
         }

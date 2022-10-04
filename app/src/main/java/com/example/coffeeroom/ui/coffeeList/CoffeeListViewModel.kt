@@ -15,21 +15,6 @@ class CoffeeListViewModel
 
     val allCoffee: LiveData<List<Coffee>> = coffeeRepository.allCoffee.asLiveData()
 
-    private val _filteredCoffeeList = MutableLiveData<List<Coffee>>()
-    val filteredCoffeeList: LiveData<List<Coffee>> get() = _filteredCoffeeList
-
-    fun add(coffee: Coffee) {
-        viewModelScope.launch {
-            coffeeRepository.insertCoffee(coffee)
-        }
-    }
-
-    fun update(coffee: Coffee) {
-        viewModelScope.launch {
-            coffeeRepository.updateCoffee(coffee)
-        }
-    }
-
     fun delete(coffee: Coffee) {
         viewModelScope.launch {
             coffeeRepository.deleteCoffee(coffee)
@@ -42,5 +27,3 @@ class CoffeeListViewModel
         }
     }
 }
-
-

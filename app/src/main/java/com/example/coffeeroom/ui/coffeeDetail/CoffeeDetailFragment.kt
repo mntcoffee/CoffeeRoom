@@ -2,7 +2,6 @@ package com.example.coffeeroom.ui.coffeeDetail
 
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,8 +29,7 @@ class CoffeeDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
         _binding = FragmentCoffeeDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -43,30 +41,30 @@ class CoffeeDetailFragment : Fragment() {
         val coffeeID = args.coffeeID
         coffeeDetailViewModel.onStart(coffeeID)
 
+        // コーヒー情報が更新された場合画面を更新
         coffeeDetailViewModel.coffeeDetail.observe(viewLifecycleOwner) { coffeeDetail ->
             setCoffeeDetail(coffeeDetail)
         }
 
-        // edit button
+        // 編集ボタン
         binding.buttonEdit.setOnClickListener {
             val action = CoffeeDetailFragmentDirections
                 .actionCoffeeDetailFragmentToCoffeeDetailEditFragment(coffeeID)
             findNavController().navigate(action)
         }
 
-        // favorite button
+        // お気に入りボタン
         binding.togglebuttonFavorite.setOnCheckedChangeListener { _, isChecked ->
             coffeeDetailViewModel.updateFavorite(isChecked)
         }
-
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
+    // コーヒー情報を画面に表示
     private fun setCoffeeDetail(coffee: Coffee) {
         var title = coffee.title!!
         var country = coffee.country!!
@@ -77,6 +75,7 @@ class CoffeeDetailFragment : Fragment() {
         var comment = coffee.comment!!
         val uri: Uri? = coffee.image
 
+        // データが空白の場合デフォルトの文字列を表示
         if(title.isBlank()) title = getString(R.string.untitled)
         if(country.isBlank()) country = getString(R.string.unknown)
         if(farm.isBlank()) farm = getString(R.string.unknown)
@@ -85,7 +84,7 @@ class CoffeeDetailFragment : Fragment() {
         if(roastingDegree.isBlank()) roastingDegree = getString(R.string.unknown)
         if(comment.isBlank()) comment = getString(R.string.not_yet_commented)
 
-        // set textView
+        // textViewにデータを表示
         binding.apply {
             textviewTitle.text = title
             textviewCountryData.text = country
@@ -96,17 +95,13 @@ class CoffeeDetailFragment : Fragment() {
             textviewComment.text = comment
             textviewUpdate.text = getString(R.string.updated_at, coffee.updatedAt)
             togglebuttonFavorite.isChecked = coffee.isFavorite
-            Log.d("uri", "${uri.toString().isNullOrBlank()}")
-            Log.d("uri", "coffee: $coffee")
+            // コーヒーの画像がある場合はそれを表示，ない場合はデフォルト画像を表示
             if(uri != null) {
-                Log.d("uri", "nonnull: called")
                 val bitmap = cameraViewModel.uriToBitmap(uri, requireContext())
                 imageviewCoffee.setImageBitmap(cameraViewModel.rotateBitmap(bitmap))
             } else {
-                Log.d("uri", "null: called")
                 imageviewCoffee.setImageResource(R.drawable.coffee_image_default)
             }
         }
     }
 }
-

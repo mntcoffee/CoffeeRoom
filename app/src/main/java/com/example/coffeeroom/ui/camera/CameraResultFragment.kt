@@ -1,7 +1,6 @@
 package com.example.coffeeroom.ui.camera
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,34 +23,35 @@ class CameraResultFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
         _binding = FragmentCameraResultBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("test", "${args.toString()}")
+
+        // 前のfragmentで撮影した画像を表示
         val uri = args.cameraResultURI.toUri()
         val bitmap = cameraViewModel.uriToBitmap(uri, requireContext())
         binding.imageviewCameraResult.setImageBitmap(cameraViewModel.rotateBitmap(bitmap))
 
+        // キャンセルボタン
         binding.buttonCancelCameraResult.setOnClickListener {
             findNavController().popBackStack()
         }
 
+        // 適用ボタン
         binding.buttonApplyCameraResult.setOnClickListener {
+            // コーヒー編集画面に戻る際に画像を送る
             val navigation = findNavController()
-            navigation.previousBackStackEntry?.savedStateHandle?.set("key", uri)
+            navigation.previousBackStackEntry?.savedStateHandle?.set("camera", uri)
             navigation.popBackStack()
         }
-
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }

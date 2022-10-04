@@ -1,6 +1,5 @@
 package com.example.coffeeroom.ui.search
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,15 +19,14 @@ class SearchViewModel
     private val _searchedCoffee = MutableLiveData<List<Coffee>>()
     val searchedCoffee: LiveData<List<Coffee>> get() = _searchedCoffee
 
+    // コーヒーの検索
     fun searchCoffee(text: String) {
         if(text.isNullOrBlank()) {
             _searchedCoffee.value = mutableListOf()
         } else {
             viewModelScope.launch {
                 _searchedCoffee.value = coffeeRepository.searchCoffee(text)
-                Log.d("search", searchedCoffee.value.toString())
             }
         }
     }
-
 }

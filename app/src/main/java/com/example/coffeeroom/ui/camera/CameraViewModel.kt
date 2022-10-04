@@ -14,6 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CameraViewModel @Inject constructor(): ViewModel() {
 
+    // 画像を回転
     fun rotateBitmap(bitmap: Bitmap, degrees: Float = 90F): Bitmap? {
         val w = bitmap.width
         val h = bitmap.height
@@ -22,6 +23,7 @@ class CameraViewModel @Inject constructor(): ViewModel() {
         return Bitmap.createBitmap(bitmap, 0, 0, w, h, m, false)
     }
 
+    // uriをbitmapに変換
     fun uriToBitmap(uri: Uri, context: Context): Bitmap {
         val inputStream = context.contentResolver.openInputStream(uri)
         return BitmapFactory.decodeStream(BufferedInputStream(inputStream))

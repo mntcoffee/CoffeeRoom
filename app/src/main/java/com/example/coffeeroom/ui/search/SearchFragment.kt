@@ -4,7 +4,6 @@ import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,8 +28,7 @@ class SearchFragment : Fragment(), TextWatcher {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -44,7 +42,6 @@ class SearchFragment : Fragment(), TextWatcher {
         adapter.setOnItemClickListener(
             object : CoffeeListAdapter.OnItemClickListener {
                 override fun onClick(coffee: Coffee) {
-                    Log.d("test", coffee.toString())
                     val id: Long = coffee.id
                     val action =
                         SearchFragmentDirections.actionSearchFragmentToCoffeeDetailFragment(
@@ -65,8 +62,7 @@ class SearchFragment : Fragment(), TextWatcher {
             if(HasFocus) showOffKeyboard()
         }
         // RecyclerViewがタッチされたときにフォーカスを設定
-        binding.recyclerViewSearchResult.setOnTouchListener { view, motionEvent ->
-            Log.d("test", "touch")
+        binding.recyclerViewSearchResult.setOnTouchListener { _, _ ->
             binding.recyclerViewSearchResult.requestFocus()
             false
         }
@@ -112,8 +108,8 @@ class SearchFragment : Fragment(), TextWatcher {
 
     }
 
+    // テキストが入力されるたびにコーヒーを検索
     override fun afterTextChanged(p0: Editable?) {
-        Log.d("search", "text: ${p0.toString()}")
         searchViewModel.searchCoffee(p0.toString())
     }
 }

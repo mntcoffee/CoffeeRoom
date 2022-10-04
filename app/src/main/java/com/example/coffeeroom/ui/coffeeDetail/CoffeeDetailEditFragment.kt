@@ -33,13 +33,17 @@ class CoffeeDetailEditFragment : Fragment(), SetImageDialogFragment.NoticeDialog
 
     private val args: CoffeeDetailEditFragmentArgs by navArgs()
 
+    // dialog(take photo or select from folder)
     private lateinit var dialog: DialogFragment
 
+    // folderから選択した画像をセット
     private val launcher = registerForActivityResult(ActivityResultContracts.OpenDocument()) {
-        Log.d("image", it.toString())
-        coffeeDetailViewModel.setImage(it!!)
+        if(it != null) {
+            coffeeDetailViewModel.setImage(it)
+        }
     }
 
+    // navigation
     private val navigation: NavController by lazy {
         findNavController()
     }
@@ -47,8 +51,7 @@ class CoffeeDetailEditFragment : Fragment(), SetImageDialogFragment.NoticeDialog
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
         _binding = FragmentCoffeeDetailEditBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -56,27 +59,33 @@ class CoffeeDetailEditFragment : Fragment(), SetImageDialogFragment.NoticeDialog
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // 表示するコーヒーのデータベースID
         val coffeeID = args.coffeeID
+        // IDが0なら追加モード，0以外なら編集モード
         coffeeDetailViewModel.isEditMode = (coffeeID != 0L)
 
-        // 編集ならデータベースのコーヒーをViewModelに格納
+        // 編集モードなら画面を初期化
         if(coffeeDetailViewModel.isEditMode) {
+            // データベースのコーヒーをViewModelに格納
             coffeeDetailViewModel.onStart(coffeeID)
             // 画面をデータベースの情報をもとに更新
             coffeeDetailViewModel.coffeeDetail.observe(viewLifecycleOwner) { coffee ->
                 setCoffeeDetail(coffee)
             }
         } else {
+            // 追加モードの場合デフォルトの画像を表示
             binding.imageviewCoffee.setImageResource(R.drawable.coffee_image_default)
         }
 
-        // callback from camera result
+        // take photoから戻ってきた時のcallback
         observeNavigationCallBack()
 
+        // 保存ボタン
         binding.buttonSave.setOnClickListener {
             saveDataBase(coffeeDetailViewModel.isEditMode)
         }
 
+        // coffeeImageが変更された場合画面を更新
         coffeeDetailViewModel.coffeeImage.observe(viewLifecycleOwner) { uri ->
             val bitmap = uri?.let {
                 cameraViewModel.uriToBitmap(it, requireContext())
@@ -86,7 +95,7 @@ class CoffeeDetailEditFragment : Fragment(), SetImageDialogFragment.NoticeDialog
             })
         }
 
-        // edit imageView
+        // dialogを表示(take photo or select from folder)
         binding.imageviewCoffee.setOnClickListener {
             dialog = SetImageDialogFragment()
             dialog.show(childFragmentManager, "image")
@@ -98,34 +107,30 @@ class CoffeeDetailEditFragment : Fragment(), SetImageDialogFragment.NoticeDialog
         _binding = null
     }
 
+    // 写真を取る場合
     override fun onDialogCameraClick(dialog: DialogFragment) {
-        Log.d("dialog", "camera")
         dialog.dismiss()
         val action = CoffeeDetailEditFragmentDirections
             .actionCoffeeDetailEditFragmentToCameraFragment()
         navigation.navigate(action)
     }
 
+    // フォルダから選択する場合
     override fun onDialogFolderClick(dialog: DialogFragment) {
-        Log.d("dialog", "folder")
         dialog.dismiss()
-        // [TODO] open folder and get a image
         launcher.launch(arrayOf("image/*"))
     }
 
+    // 画像選択のcallback
     private fun observeNavigationCallBack() {
         Log.d("callback", "call")
-        navigation.currentBackStackEntry?.savedStateHandle?.getLiveData<Uri>("key")
+        navigation.currentBackStackEntry?.savedStateHandle?.getLiveData<Uri>("camera")
             ?.observe(viewLifecycleOwner) {
-                Log.d("test", it.toString())
-//                val inputStream = requireContext().contentResolver.openInputStream(it)
-//                val bitmap = BitmapFactory.decodeStream(BufferedInputStream(inputStream))
-//                cameraViewModel.rotateBitmap(bitmap)
-//                    ?.let { it -> coffeeDetailViewModel.setImage(it) }
                 coffeeDetailViewModel.setImage(it)
             }
     }
 
+    // コーヒー情報を画面に表示
     private fun setCoffeeDetail(coffee: Coffee) {
         binding.apply {
             edittextTitle.editText?.setText(coffee.title)
@@ -136,43 +141,43 @@ class CoffeeDetailEditFragment : Fragment(), SetImageDialogFragment.NoticeDialog
             edittextRoastingDegree.editText?.setText(coffee.roastingDegree)
             edittextComment.editText?.setText(coffee.comment)
 
+            // 撮影した画像orフォルダから選択した画像がある場合はそれを表示
+            // データベースの画像がある場合はそれを表示
+            // いずれでもない場合はデフォルト画像を表示
             if(coffeeDetailViewModel.coffeeImage.value != null) {
-                Log.d("image", "camera")
                 val bitmap = cameraViewModel.uriToBitmap(
                     coffeeDetailViewModel.coffeeImage.value!!,
                     requireContext()
                 )
                 imageviewCoffee.setImageBitmap(cameraViewModel.rotateBitmap(bitmap))
             } else if(coffee.image != null) {
-                Log.d("image", "database")
                 imageviewCoffee.setImageBitmap(
                     cameraViewModel.uriToBitmap(coffee.image, requireContext())
                 )
                 coffeeDetailViewModel.setImage(coffee.image)
             } else {
-                Log.d("image", "default")
                 imageviewCoffee.setImageResource(R.drawable.coffee_image_default)
             }
         }
     }
 
+    // データベースに保存(更新)
     private fun saveDataBase(isEditMode: Boolean) {
-        // get current time
+        // 現在時刻を取得
         val updatedTime = LocalDateTime.now()
         val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")
         val formattedUpdatedTime = updatedTime.format(formatter)
-        // create coffee info from EditText
-        var title = binding.edittextTitle.editText?.text.toString()
-        var country = binding.edittextCountry.editText?.text.toString()
-        var farm = binding.edittextFarm.editText?.text.toString()
-        var process = binding.edittextProcess.editText?.text.toString()
-        var roaster = binding.edittextRoaster.editText?.text.toString()
-        var roastingDegree = binding.edittextRoastingDegree.editText?.text.toString()
-        var comment = binding.edittextComment.editText?.text.toString()
-        // get coffee image
-//        val coffeeImage = (binding.imageviewCoffee.drawable as BitmapDrawable)?.bitmap
+        // editTextのデータを取得
+        val title = binding.edittextTitle.editText?.text.toString()
+        val country = binding.edittextCountry.editText?.text.toString()
+        val farm = binding.edittextFarm.editText?.text.toString()
+        val process = binding.edittextProcess.editText?.text.toString()
+        val roaster = binding.edittextRoaster.editText?.text.toString()
+        val roastingDegree = binding.edittextRoastingDegree.editText?.text.toString()
+        val comment = binding.edittextComment.editText?.text.toString()
         val coffeeImage = coffeeDetailViewModel.coffeeImage.value
 
+        // 編集モードならupdateメソッド，追加モードならaddメソッド
         if(isEditMode) {
             val coffee = coffeeDetailViewModel.coffeeDetail.value?.copy(
                 updatedAt = formattedUpdatedTime,
@@ -185,9 +190,7 @@ class CoffeeDetailEditFragment : Fragment(), SetImageDialogFragment.NoticeDialog
                 roastingDegree = roastingDegree,
                 comment = comment
             )
-            Log.d("update", "update: $coffee")
             coffeeDetailViewModel.update(coffee!!)
-
         } else {
             val coffee = Coffee(
                 id = 0L,
@@ -203,7 +206,6 @@ class CoffeeDetailEditFragment : Fragment(), SetImageDialogFragment.NoticeDialog
                 roastingDegree = roastingDegree,
                 comment = comment
             )
-            Log.d("add", "add: $coffee")
             coffeeDetailViewModel.add(coffee)
         }
         navigation.popBackStack()
