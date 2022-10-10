@@ -24,4 +24,10 @@
     <string name="sample_roaster">ABC Coffee Roaster</string>
     <string name="sample_roasting_degree">City Roast</string>
     <string name="search">検索</string>
+    <string name="updated_at">最終更新日: %s</string>
+    <string name="untitled">Untitled</string>
+    <string name="unknown">Unknown</string>
+    <string name="not_yet_commented">Not yet commented</string>
+    <string name="take_a_photo">Take a photo</string>
+    <string name="select_a_photo">Select a photo from your folder</string>
 </resources>

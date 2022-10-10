@@ -18,10 +18,20 @@
             android:layout_width="@dimen/image_size_coffee_detail"
             android:layout_height="@dimen/image_size_coffee_detail"
             android:layout_marginTop="@dimen/image_margin"
-            android:src="@drawable/ic_baseline_android_24"
+            android:alpha="0.5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_baseline_photo_camera_24"
+            app:layout_constraintStart_toStartOf="@id/imageview_coffee"
+            app:layout_constraintTop_toTopOf="@id/imageview_coffee"
+            app:layout_constraintEnd_toEndOf="@id/imageview_coffee"
+            app:layout_constraintBottom_toBottomOf="@id/imageview_coffee"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edittext_title"
@@ -167,8 +177,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/hint_input_comment"
                 android:textSize="@dimen/text_size_detail"
-                android:inputType="text"
-                android:maxLines="3"/>
+                android:inputType="textMultiLine"
+                android:minLines="1"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton

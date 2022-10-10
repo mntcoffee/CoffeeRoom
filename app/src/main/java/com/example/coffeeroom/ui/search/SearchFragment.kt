@@ -1,41 +1,35 @@
-package com.example.coffeeroom.ui.coffeeList
+package com.example.coffeeroom.ui.search
 
-import android.content.Context
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.coffeeroom.R
 import com.example.coffeeroom.data.model.coffee.Coffee
-import com.example.coffeeroom.databinding.FragmentCoffeeListBinding
-import com.example.coffeeroom.databinding.FragmentSearchResultBinding
+import com.example.coffeeroom.databinding.FragmentSearchBinding
+import com.example.coffeeroom.ui.coffeeList.CoffeeListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SearchResultFragment : Fragment(), TextWatcher {
+class SearchFragment : Fragment(), TextWatcher {
 
-    private var _binding: FragmentSearchResultBinding? = null
+    private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
-    private val searchResultViewModel: SearchResultViewModel by viewModels()
+    private val searchViewModel: SearchViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        _binding = FragmentSearchResultBinding.inflate(inflater, container, false)
+    ): View {
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -48,10 +42,11 @@ class SearchResultFragment : Fragment(), TextWatcher {
         adapter.setOnItemClickListener(
             object : CoffeeListAdapter.OnItemClickListener {
                 override fun onClick(coffee: Coffee) {
-                    Log.d("test", coffee.toString())
                     val id: Long = coffee.id
-                    val action = SearchResultFragmentDirections
-                        .actionSearchResultFragmentToCoffeeDetailFragment(id)
+                    val action =
+                        SearchFragmentDirections.actionSearchFragmentToCoffeeDetailFragment(
+                            id
+                        )
                     findNavController().navigate(action)
                 }
             }
@@ -67,8 +62,7 @@ class SearchResultFragment : Fragment(), TextWatcher {
             if(HasFocus) showOffKeyboard()
         }
         // RecyclerViewがタッチされたときにフォーカスを設定
-        binding.recyclerViewSearchResult.setOnTouchListener { view, motionEvent ->
-            Log.d("test", "touch")
+        binding.recyclerViewSearchResult.setOnTouchListener { _, _ ->
             binding.recyclerViewSearchResult.requestFocus()
             false
         }
@@ -77,7 +71,7 @@ class SearchResultFragment : Fragment(), TextWatcher {
         binding.edittextSearch.addTextChangedListener(this)
 
         // 検索結果でリストを更新
-        searchResultViewModel.searchedCoffee.observe(viewLifecycleOwner) { searchedList ->
+        searchViewModel.searchedCoffee.observe(viewLifecycleOwner) { searchedList ->
             adapter.submitList(searchedList)
         }
 
@@ -114,8 +108,8 @@ class SearchResultFragment : Fragment(), TextWatcher {
 
     }
 
+    // テキストが入力されるたびにコーヒーを検索
     override fun afterTextChanged(p0: Editable?) {
-        Log.d("search", "text: ${p0.toString()}")
-        searchResultViewModel.searchCoffee(p0.toString())
+        searchViewModel.searchCoffee(p0.toString())
     }
 }

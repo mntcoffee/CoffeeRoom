@@ -1,26 +1,18 @@
 package com.example.coffeeroom.ui.coffeeList
 
-import android.graphics.Bitmap
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.coffeeroom.MainApplication
 import com.example.coffeeroom.R
 import com.example.coffeeroom.data.model.coffee.Coffee
 import com.example.coffeeroom.databinding.FragmentCoffeeListBinding
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
 
 @AndroidEntryPoint
 class CoffeeListFragment : Fragment() {
@@ -33,7 +25,7 @@ class CoffeeListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentCoffeeListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -58,28 +50,9 @@ class CoffeeListFragment : Fragment() {
         list.adapter = adapter
         list.layoutManager = LinearLayoutManager(context)
 
-        // sample data
-        val coffee = Coffee(
-            id = 0L,
-            createdAt = Date(),
-            updatedAt = Date(),
-            isFavorite = true,
-            title = "Columbia ABC Farm Neon Tet Angels Natural",
-            country = "Columbia",
-            farm = "ABC Farm",
-            process = "Natural",
-            roaster = "ABC roaster",
-            roastingDegree = "medium",
-            comment = "It is very delicious."
-        )
-
+        // すべてのコーヒーを監視
         coffeeListViewModel.allCoffee.observe(viewLifecycleOwner) { allCoffee ->
             allCoffee.let { adapter.submitList(it) }
-            Log.d("test", allCoffee.toString())
-        }
-
-        coffeeListViewModel.filteredCoffeeList.observe(viewLifecycleOwner) { filteredCoffee ->
-            adapter.submitList(filteredCoffee)
         }
 
         // 新規追加ボタン
@@ -93,12 +66,10 @@ class CoffeeListFragment : Fragment() {
         binding.toolbarCoffeeList.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.search -> {
-                    Log.d("search", "search")
                     val action = CoffeeListFragmentDirections
                         .actionCoffeeListFragmentToSearchResultFragment()
                     findNavController().navigate(action)
                 }
-
             }
             true
         }

@@ -1,7 +1,6 @@
 package com.example.coffeeroom.ui.coffeeList
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -14,7 +13,6 @@ import com.example.coffeeroom.data.model.coffee.Coffee
 class CoffeeListAdapter : ListAdapter<Coffee, CoffeeListViewHolder>(
     DIFF_CALLBACK
 ) {
-
     // add clickListener
     private lateinit var listener: OnItemClickListener
 
@@ -53,5 +51,4 @@ private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Coffee>() {
     override fun areContentsTheSame(oldItem: Coffee, newItem: Coffee): Boolean {
         return oldItem == newItem
     }
-
 }
